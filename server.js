@@ -1,15 +1,14 @@
 const dotenv = require(`dotenv`);
 const express = require(`express`);
-const hbs = require(`hbs`);
 const bodyParser = require(`body-parser`);
 const routes = require(`./routes/routes.js`);
 const db = require(`./models/db.js`);
+const ejs = require('ejs');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set(`view engine`, `hbs`);
-hbs.registerPartials(__dirname + `/views/partials`);
+app.set('view engine', 'ejs');
 
 dotenv.config();
 port = process.env.PORT;
