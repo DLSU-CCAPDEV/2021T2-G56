@@ -54,7 +54,7 @@ $(document).ready(function() {
                         alert('invalid credentials! try again');
                     } else {
                         alert('logging in');
-                        /console.log(result);
+                        console.log(result);
                         // window.location.href = "/test";
                     }
                     
