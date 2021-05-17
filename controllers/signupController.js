@@ -1,3 +1,6 @@
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
 const db = require('../models/db.js');
 const User = require('../models/UserModel.js');
 
@@ -13,23 +16,22 @@ const signupController = {
                 res.send( result );
             });
         } else if (req.body.querytype == 'signup') {
-
-
-
-
+            var entry = {
+                username: req.body.username,
+            }
+            db.findOne(User, entry, {}, function(result) {
+                if(result == null) {
+                    entry = {
+                        email: req.body.email
+                    }
+                    db.findOne(User, entry, {}, function(result) {
+                        res.send(result);
+                    });
+                } else {
+                    res.send(result);
+                }
+            });
         }
-    },
-
-    getTestPage: function(req, res) {
-        res.render( 'test' );
-    },
-
-    getAll: function(req, res) {
-        
-        db.findMany(User, {}, {}, {}, function(result) {
-            res.send( {result} );
-        });
-
     }
 
 }

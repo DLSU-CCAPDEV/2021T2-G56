@@ -61,23 +61,19 @@ $(document).ready(function() {
 
 
             }
-            
 
 
         } else if( $('.login-button').val() == 'register' ) {
-
-            $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput, querytype: 'signup' }, function (result) {
-
-                if( validator.isEmpty(usernameInput) || validator.isEmpty(emailInput) || validator.isEmpty(passwordInput) ) {
-                    alert('form is not filled completely! try completing sign up first');
-                } else {
+            if( validator.isEmpty(usernameInput) || validator.isEmpty(emailInput) || validator.isEmpty(passwordInput) ) {
+                alert('form is not filled completely! try completing sign up first');
+            } else {
+                $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput, querytype: 'signup' }, function (result) {
                     if( result.username == usernameInput ) {
                         alert('someone has that username!');
                     } else if( result.email == emailInput ) {
                         alert('email exists already!');
                     } else {
                         var isValidLength = validator.isLength(passwordInput, {min: 8});
-
                         if(isValidLength) {
                             alert('create user');
                             // $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
@@ -86,11 +82,10 @@ $(document).ready(function() {
                         } else {
                             alert('password requires a minimum of 8 characters!');
                         }
-                        
                     }
-                }
-                
-            });
+                    
+                });
+            }
 
         }
     });
