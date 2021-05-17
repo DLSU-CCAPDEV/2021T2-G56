@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
+const UserModel = require('./UserModel.js');
 
-const TransactionModel = require('./TransactionModel.js');
 
 const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/catsallian-database?retryWrites=true&w=majority';
 
