@@ -1,9 +1,9 @@
 const dotenv = require(`dotenv`);
 const express = require(`express`);
-const ejs = require('ejs');
 const bodyParser = require(`body-parser`);
 const routes = require(`./routes/routes.js`);
 const db = require(`./models/db.js`);
+const ejs = require('ejs');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));

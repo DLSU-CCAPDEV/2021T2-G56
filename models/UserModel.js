@@ -22,13 +22,9 @@ var UserSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    bio: {
-        type: String,
-        required: false
-    },
     profileimg: {
         type: String,
-        required: true
+        required: false
     },
     upvotecount: {
         type: Number,

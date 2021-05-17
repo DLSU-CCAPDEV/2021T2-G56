@@ -1,10 +1,9 @@
 
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const UserModel = require('./UserModel.js');
 
-dotenv.config();
-const url = process.env.DB_URL;
+
+const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/catsallian-database?retryWrites=true&w=majority';
 
 const options = {
     useUnifiedTopology: true,
@@ -81,6 +80,7 @@ const database = {
             return callback(true);
         });
     }
+
 }
 
 module.exports = database;
