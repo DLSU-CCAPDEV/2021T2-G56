@@ -17,16 +17,6 @@ const controller = {
         db.findMany(User, {}, projection, function(result) {
             res.render('index', {result});
         });
-    },
-
-    getTest: function(req, res) {
-
-        var username = 'Bingo';
-        
-        db.findOne(User, {username: username}, {},function(result) {
-            res.send( {result} );
-        });
-
     }
 
 }
