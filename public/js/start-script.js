@@ -49,13 +49,13 @@ $(document).ready(function() {
                 alert('form is not filled completely! try again');
             } else {
 
-                $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput }, function (result) {
-
+                $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput, querytype: 'login'  }, function (result) {
                     if( jQuery.isEmptyObject(result) ) {
                         alert('invalid credentials! try again');
                     } else {
-                        console.log(result);
-                        window.location.href = "/home";
+                        alert('logging in');
+                        /console.log(result);
+                        // window.location.href = "/test";
                     }
                     
                 });
@@ -80,9 +80,10 @@ $(document).ready(function() {
                         var isValidLength = validator.isLength(passwordInput, {min: 8});
 
                         if(isValidLength) {
-                            $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
-                                window.location.href = "/home";
-                            });
+                            alert('create user');
+                            // $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
+                            //     window.location.href = "/test";
+                            // });
                         } else {
                             alert('password requires a minimum of 8 characters!');
                         }
@@ -108,7 +109,7 @@ $(document).ready(function() {
         }
     }
 
-    setInterval(rotateImages,5000);
+    //setInterval(rotateImages,5000);
     ////////////////////////////////
 
 });
