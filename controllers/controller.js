@@ -20,7 +20,11 @@ const controller = {
     },
 
     getTest: function(req, res) {
-        res.render('test');
+
+        db.findMany(User, {}, {}, {}, function(result) {
+            res.send({result});
+        });
+
     }
 
 }
