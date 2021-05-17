@@ -12,7 +12,10 @@ const signupController = {
             db.findOne(User, entry, {}, function(result) {
                 res.send( result );
             });
-        } else {
+        } else if (req.body.querytype == 'signup') {
+
+
+
 
         }
     },

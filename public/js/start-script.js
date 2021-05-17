@@ -66,7 +66,7 @@ $(document).ready(function() {
 
         } else if( $('.login-button').val() == 'register' ) {
 
-            $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput }, function (result) {
+            $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput, querytype: 'signup' }, function (result) {
 
                 if( validator.isEmpty(usernameInput) || validator.isEmpty(emailInput) || validator.isEmpty(passwordInput) ) {
                     alert('form is not filled completely! try completing sign up first');
