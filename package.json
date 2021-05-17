@@ -1,0 +1,19 @@
+{
+  "name": "catsallian-database",
+  "version": "1.0.0",
+  "description": "It's a database...for cats!",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DLSU-CCAPDEV/2021T2-G56.git"
+  },
+  "author": "enricosebastian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DLSU-CCAPDEV/2021T2-G56/issues"
+  },
+  "homepage": "https://github.com/DLSU-CCAPDEV/2021T2-G56#readme"
+}
