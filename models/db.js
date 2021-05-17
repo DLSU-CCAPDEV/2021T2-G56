@@ -1,11 +1,9 @@
 
 const mongoose = require('mongoose');
-const dotenv = require(`dotenv`);
 
 const TransactionModel = require('./TransactionModel.js');
 
-dotenv.config();
-const url = dotenv.DB_URL;
+const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/catsallian-database?retryWrites=true&w=majority';
 
 const options = {
     useUnifiedTopology: true,
