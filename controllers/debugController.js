@@ -5,7 +5,7 @@ const debugController = {
 
     getTest: function(req, res) {
 
-        var username = 'Bingo';
+        var username = req.params.username;
         
         db.findOne(User, {username: username}, {},function(result) {
             res.send( {result} );
