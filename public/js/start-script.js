@@ -53,9 +53,8 @@ $(document).ready(function() {
                     if( jQuery.isEmptyObject(result) ) {
                         alert('invalid credentials! try again');
                     } else {
-                        alert('logging in');
-                        console.log(result);
-                        // window.location.href = "/test";
+                        //console.log(result);
+                        window.location.href = "/debug/page";
                     }
                     
                 });
