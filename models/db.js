@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const TransactionModel = require('./TransactionModel.js');
 
-const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/catsallian-database?retryWrites=true&w=majority';
+const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 const options = {
     useUnifiedTopology: true,
