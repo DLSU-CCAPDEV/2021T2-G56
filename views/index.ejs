@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> PayApp </title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+
 </head>
 <body>
-    <h1> hatdog </h1>
+    <div id="container">
+        <h1> PayApp </h1>
 
-    <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis nemo eveniet dolore vitae esse iure praesentium nam impedit. Iusto quam, magnam eveniet quod omnis suscipit aperiam recusandae nulla vitae fugit minima animi, totam sit dolores! Laborum, dignissimos repellat! Saepe animi totam reprehenderit dicta natus hic pariatur quaerat autem, facilis ullam? 
-    </p>
+        <div id="content">
+            <form id="payment_form">
+                <input type="text" name="name" id="name" class="field" placeholder="Name"> <br>
+                <input type="number" name="refno" id="refno" class="field" placeholder="Reference Number"> <br>
+                <input type="number" name="amount" id="amount" class="field" placeholder="Amount"> <br>
+                <input type="button" name="submit" id="submit" value="SUBMIT">
+            </form>
+
+            <p id="error"></p>
+
+            <!--
+                TODO: Display all transactions here. Each transaction should be retrieved from the database and displayed through rendering `../partials/card.hbs`.
+            -->
+            <div id="cards">
+            <!-- your code here -->
+
+            {{#each result}}
+                {{> card }}
+            {{/each}}
+            
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
