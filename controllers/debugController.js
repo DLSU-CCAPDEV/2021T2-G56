@@ -11,6 +11,14 @@ const debugController = {
             res.send( {result} );
         });
 
+    },
+
+    getAll: function(req, res) {
+        
+        db.findMany(User, {}, {}, {}, function(result) {
+            res.send( {result} );
+        });
+
     }
 
 }

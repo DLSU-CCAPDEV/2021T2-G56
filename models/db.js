@@ -42,8 +42,8 @@ const database = {
         });
     },
 
-    findMany: function(model, query, projection, callback) {
-        model.find(query, projection, function(error, result) {
+    findMany: function(model, query, projection, sortType, callback) {
+        model.find(query, projection, sortType, function(error, result) {
             if(error) return callback(false);
             return callback(result);
         });
