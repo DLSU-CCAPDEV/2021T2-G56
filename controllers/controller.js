@@ -1,5 +1,5 @@
 const db = require('../models/db.js');
-const Transaction = require('../models/TransactionModel.js');
+const User = require('../models/UserModel.js');
 
 const controller = {
 
@@ -21,7 +21,7 @@ const controller = {
                 amount: 1 
         }
 
-        db.findMany(Transaction, {}, projection, function(result) {
+        db.findMany(User, {}, projection, function(result) {
             res.render('index', {result}); // This is to load the page initially
         });
     },
@@ -37,7 +37,7 @@ const controller = {
         // your code here
         var refno = req.query.refno;
         
-        db.findOne(Transaction, {refno: refno}, 'refno' ,function(result) {
+        db.findOne(User, {refno: refno}, 'refno' ,function(result) {
             res.send(result);
         });
     },
@@ -55,7 +55,7 @@ const controller = {
             amount: req.query.amount
         }
 
-        db.insertOne(Transaction, entry, function(flag) {
+        db.insertOne(User, entry, function(flag) {
             if(flag) {
                 //do nothing
                 res.send(entry);
@@ -75,7 +75,7 @@ const controller = {
         var conditions = {
             refno: req.query.refno
         }
-        db.deleteOne(Transaction, conditions, function(flag) {
+        db.deleteOne(User, conditions, function(flag) {
             if(!flag) {
                 console.log('Uh oh, something went wrong...');
             }
