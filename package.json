@@ -1,27 +1,26 @@
 {
-  "name": "catsallian-database",
+  "name": "ccapdev-2021t2-mc03",
   "version": "1.0.0",
-  "description": "It's a database...for cats!",
+  "description": "Mini Challenge 3 for CCAPDEV2021T2",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DLSU-CCAPDEV/2021T2-G56.git"
+    "url": "git+https://github.com/arvention/ccapdev-2021t2-mc03.git"
   },
-  "author": "enricosebastian",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DLSU-CCAPDEV/2021T2-G56/issues"
+    "url": "https://github.com/arvention/ccapdev-2021t2-mc03/issues"
   },
-  "homepage": "https://github.com/DLSU-CCAPDEV/2021T2-G56#readme",
+  "homepage": "https://github.com/arvention/ccapdev-2021t2-mc03#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "dotenv": "^9.0.2",
-    "ejs": "^3.1.6",
+    "dotenv": "^9.0.1",
     "express": "^4.17.1",
-    "mongoose": "^5.12.9",
-    "nodemon": "^2.0.7"
+    "hbs": "^4.1.2",
+    "mongoose": "^5.12.7"
   }
 }

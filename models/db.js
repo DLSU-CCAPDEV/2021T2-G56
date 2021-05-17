@@ -81,6 +81,7 @@ const database = {
             return callback(true);
         });
     }
+
 }
 
 module.exports = database;
