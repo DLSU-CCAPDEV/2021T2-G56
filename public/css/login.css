@@ -1,0 +1,216 @@
+:root {
+    --body: rgba(201, 186, 168, 0.74);
+    
+    --postbox: rgb(165, 139, 111);
+    --font: rgb(31,16,5);
+    --navbar: rgb(223,201,172);
+    --background: white;
+    --highlight: rgb(165, 146, 125);
+
+    font-size: 40px;
+    text-align: justify;
+    font-family: 'Lato', sans-serif;
+}
+
+html, body {
+    min-height: 100%;
+    height: 100%;
+
+    margin: 0px;
+    padding: 0px;
+    color: var(--font);
+    overflow: hidden
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    color: var(--font);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--font);
+    text-decoration: none;
+}
+
+/* /////////////////////////////////// */
+
+/* TAGS: posts, postbox, post-wall, post-content, post content*/
+.wrapper {
+    background-color: transparent;
+    min-height: 100%;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.leftside {
+    width: 65%;
+    background: var(--body);
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.upperhalf {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-left: 15px;
+}
+
+.lowerhalf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.login-options {
+    font-size: 20px;
+    margin-top: 12px;
+    color: var(--font);
+}
+
+.title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 75px;
+    color: white;
+    /* margin-bottom: 200px; */
+    /* margin-left: 50px; */
+    
+}
+
+.login-button {
+    width: 300px;
+    height: 40px;
+    font-size: 23px;
+    border-radius: 12px;
+}
+
+.username-input {
+    width: 500px;
+    height: 35px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    font-size: 20px;
+    padding-left: 15px;
+}  
+
+.email-input {
+    width: 500px;
+    height: 35px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    font-size: 20px;
+    padding-left: 15px;
+}   
+
+input:focus {
+    outline-width: 0;
+}   
+
+.password-input {
+    margin-left: 15px;
+    width: 500px;
+    height: 35px;
+    border-radius: 12px;
+    font-size: 20px;
+    padding-left: 15px;
+}   
+
+.password-input :focus {
+    outline-width: 0;
+}   
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+}
+
+.invalid {
+    color: red;
+    align-self: center;
+    text-align: left;
+    font-size: 20px;
+}
+
+.image-grid {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: -1;
+}
+
+.image-grid-col {
+    display: flex;
+}
+
+
+.background-image {
+    width: 250px;
+    height: 250px;
+}
+
+.rotating {
+    animation-name: rotateAnimation;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
+.invisible {
+    display: none;
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotateY(0 deg);
+    } to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* ///////////////////////////////////// */
+
+
+@media screen and (max-width: 1370px) {
+    .title {
+        font-size: 90px;
+        margin-bottom: 10px;
+    }
+
+    .leftside {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .upperhalf {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+    .leftside {
+        width: 100%;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');

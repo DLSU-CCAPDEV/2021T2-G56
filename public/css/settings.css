@@ -1,0 +1,243 @@
+:root {
+    --body: rgb(201, 186, 168);
+    
+    --postbox: rgb(165, 139, 111);
+    --font: rgb(31,16,5);
+    --navbar: rgb(223,201,172);
+    --background: white;
+    --highlight: rgb(192, 166, 138);
+
+    font-size: 40px;
+    text-align: justify;
+    font-family: 'Lato', sans-serif;
+}
+
+html, body {
+    min-height: 100%;
+    height: 100%;
+
+    margin: 0px;
+    padding: 0px;
+    color: var(--font);
+    overflow: hidden
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    color: var(--font);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--font);
+    text-decoration: none;
+}
+
+label {
+    font-weight: 700;
+}
+
+/* /////////////////////////////////// */
+
+/* TAGS: posts, postbox, post-wall, post-content, post content*/
+.wrapper {
+    background-color: transparent;
+    min-height: 100%;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.leftside {
+    width: 65%;
+    background: var(--highlight);
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.upperhalf {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-left: 15px;
+}
+
+.lowerhalf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.login-options {
+    font-size: 20px;
+    margin-top: 12px;
+    color: var(--font);
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 50px;
+    color: var(--font);
+    /* margin-bottom: 200px; */
+    /* margin-left: 50px; */
+    
+}
+
+.login-button {
+    width: 300px;
+    height: 40px;
+    font-size: 23px;
+    border-radius: 12px;
+}
+
+.text-input {
+    width: 500px;
+    height: 35px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    font-size: 20px;
+    padding-left: 15px;
+}  
+
+input:focus {
+    outline-width: 0;
+}   
+
+.text-input :focus {
+    outline-width: 0;
+}   
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-grid {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: -1;
+}
+
+.image-grid-col {
+    display: flex;
+}
+
+
+.background-image {
+    width: 250px;
+    height: 250px;
+}
+
+.rotating {
+    animation-name: rotateAnimation;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
+.update-account-button {
+    border-radius: 10px;
+}
+
+.update-cancel-button {
+    border-radius: 10px;
+}
+
+.logout-button {
+    border-radius: 10px;
+    background: rgb(92, 37, 37);
+    color: white;
+}
+
+
+.profile-pic-upload {
+    border-radius: 10px;
+}
+
+/* SETTINGS */
+.settings-profile-pic {
+    border-radius: 100%;
+    width: 350px;
+    height: 350px;
+}
+/* /////////////// */
+
+.invisible {
+    display: none;
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotateY(0 deg);
+    } to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* ///////////////////////////////////// */
+
+
+@media screen and (max-width: 1370px) {
+
+    .leftside {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .upperhalf {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+    }
+
+    .loginform {
+        margin-top: 20px;
+    }
+
+    .lowerhalf {
+        margin-top: 0px;
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+    .leftside {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .loginform {
+        width: 400px;
+    }
+    .text-input {
+        width: 350px;
+    }
+    /* form {
+        font-size: 20px;
+    } */
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');

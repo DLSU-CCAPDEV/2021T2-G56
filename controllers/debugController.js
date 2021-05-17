@@ -3,7 +3,7 @@ const User = require('../models/UserModel.js');
 
 const debugController = {
 
-    getTest: function(req, res) {
+    getTestUser: function(req, res) {
 
         var username = req.params.username;
         
@@ -11,6 +11,10 @@ const debugController = {
             res.send( {result} );
         });
 
+    },
+
+    getTestPage: function(req, res) {
+        res.render( 'test' );
     },
 
     getAll: function(req, res) {
