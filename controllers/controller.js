@@ -21,8 +21,10 @@ const controller = {
 
     getTest: function(req, res) {
 
-        db.findMany(User, {}, {}, {}, function(result) {
-            res.send({result});
+        var username = 'Bingo';
+        
+        db.findOne(User, {username: username}, {},function(result) {
+            res.send( {result} );
         });
 
     }
