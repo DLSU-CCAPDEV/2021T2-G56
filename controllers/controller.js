@@ -8,7 +8,7 @@ const controller = {
     },
 
     getIndex: function(req, res) {
-        res.send('hi lmao');
+        res.render('index');
     },
 
     getDB: function(req, res) {
