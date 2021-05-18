@@ -14,7 +14,13 @@ const signupController = {
                 if(result) {
                     bcrypt.compare(req.body.password, result.password, function(err, equal) {
                         if(equal) {
-                            console.log(result);
+
+                            // req.session.userid = result.userid;
+                            // req.session.username = result.username
+                            // req.session.email = result.email
+
+                            // console.log( req.session.userid );
+                            console.log( result.userid );
                             res.send( result );
 
                         } else {
