@@ -50,11 +50,12 @@ $(document).ready(function() {
             } else {
 
                 $.post('/checkExistence', { username: usernameInput, email: emailInput, password: passwordInput, querytype: 'login'  }, function (result) {
-                    if( jQuery.isEmptyObject(result) ) {
-                        alert('invalid credentials! try again');
+                    if( result.error ) {
+                        console.log(result.error);
+                        alert('try again');
                     } else {
-                        //console.log(result);
-                        window.location.href = "/debug/page";
+                        console.log(result);
+                        // window.location.href = "/debug/page";
                     }
                     
                 });

@@ -8,12 +8,31 @@ const signupController = {
 
     postCheckExistence: function(req, res) {
         if(req.body.querytype == 'login') {
-            var entry = {
-                email: req.body.email,
-                password: req.body.password
-            }
-            db.findOne(User, entry, {}, function(result) {
-                res.send( result );
+
+            db.findOne(User, { email: req.body.email }, {}, function(result) {
+
+                if(result) {
+                    bcrypt.compare(req.body.password, result.password, function(err, equal) {
+                        if(equal) {
+                            console.log(result);
+                            res.send( result );
+
+                        } else {
+                            errMessage = {
+                                error: 'wrong password'
+                            }
+                            //console.log( 'wrong password' );
+                            res.send( errMessage ); //send nothing lmao
+                        }
+                    });
+                } else {
+                    errMessage = {
+                        error: 'email does not exist in database'
+                    }
+                    //console.log( 'user tried to log in with non-existent email' );
+                    res.send( errMessage ); //send nothing lmao
+                }
+                
             });
         } else if (req.body.querytype == 'signup') {
             var entry = {
