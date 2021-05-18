@@ -20,6 +20,7 @@ const debugController = {
     getAll: function(req, res) {
         
         db.findMany(User, {}, {}, {}, function(result) {
+            console.log(result.length);
             res.send( {result} );
         });
 

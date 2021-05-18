@@ -36,16 +36,23 @@ const signupController = {
 
     postCreateUser: function(req, res) {
 
-        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        //create a new userid
+        db.findMany(User, {}, {}, {}, function(result) {
+            bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             var entry = {
-                userid: 69,
+                userid: result.length + 1,
                 username: req.body.username,
                 email: req.body.email,
                 password: hash,
                 datecreated: Date.now()
             }
+            db.insertOne(User, entry, function(flag){
+                // res.send(entry);
+            });
+        });
 
-            res.send(entry);
+            
+            
         });
 
     }
