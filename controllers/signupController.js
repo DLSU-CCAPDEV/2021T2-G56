@@ -29,7 +29,7 @@ const signupController = {
                     errMessage = {
                         error: 'email does not exist in database'
                     }
-                    //console.log( 'user tried to log in with non-existent email' );
+                    // console.log( 'user tried to log in with non-existent email' );
                     res.send( errMessage ); //send nothing lmao
                 }
                 
