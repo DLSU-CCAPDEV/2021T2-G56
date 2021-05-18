@@ -32,6 +32,19 @@ const signupController = {
                 }
             });
         }
+    },
+
+    postCreateUser: function(req, res) {
+        var entry = {
+            userid: 69,
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            datecreated: Date.now(),
+        }
+
+        res.send(entry);
+
     }
 
 }

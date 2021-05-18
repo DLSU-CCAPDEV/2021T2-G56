@@ -75,10 +75,9 @@ $(document).ready(function() {
                     } else {
                         var isValidLength = validator.isLength(passwordInput, {min: 8});
                         if(isValidLength) {
-                            alert('create user');
-                            // $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
-                            //     window.location.href = "/test";
-                            // });
+                            $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
+                                alert('created a user');;
+                            });
                         } else {
                             alert('password requires a minimum of 8 characters!');
                         }
