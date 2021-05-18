@@ -76,7 +76,7 @@ $(document).ready(function() {
                         var isValidLength = validator.isLength(passwordInput, {min: 8});
                         if(isValidLength) {
                             $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
-                                alert('created a user');;
+                                console.log(result);
                             });
                         } else {
                             alert('password requires a minimum of 8 characters!');
