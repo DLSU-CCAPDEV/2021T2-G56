@@ -54,19 +54,18 @@ const signupController = {
     },
 
     postCreateUser: function(req, res) {
-
         //create a new userid
-        db.findMany(User, {}, {}, {}, function(result) {
+        db.findMany(User, {}, {}, { sort: {userid: -1} }, function(result) {
             bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             var entry = {
-                userid: result.length + 1,
+                userid: result[0].userid + 1,
                 username: req.body.username,
                 email: req.body.email,
                 password: hash,
                 datecreated: Date.now()
             }
             db.insertOne(User, entry, function(flag){
-                // res.send(entry);
+                res.send(entry);
             });
         });
 

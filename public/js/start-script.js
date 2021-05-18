@@ -55,7 +55,7 @@ $(document).ready(function() {
                         alert('try again');
                     } else {
                         console.log(result);
-                        // window.location.href = "/debug/page";
+                        window.location.href = "/debug/page";
                     }
                     
                 });
@@ -75,11 +75,14 @@ $(document).ready(function() {
                         alert('email exists already!');
                     } else {
                         var isValidLength = validator.isLength(passwordInput, {min: 8});
-                        if(isValidLength) {
-                            $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput } ); // creates a valid account+hashing
-                            window.location.href = "/debug/page"; //redirect to home page
-                        } else {
+                        if(!isValidLength) {
                             alert('password requires a minimum of 8 characters!');
+                        } else {
+                            
+                            $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
+                                console.log(result);
+                                window.location.href = " /debug/page";
+                            } );
                         }
                     }
                     
