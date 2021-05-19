@@ -4,6 +4,7 @@ const bodyParser = require(`body-parser`);
 const routes = require(`./routes/routes.js`);
 const db = require(`./models/db.js`);
 const ejs = require('ejs');
+const session = require('express-session');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
