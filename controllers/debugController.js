@@ -1,3 +1,4 @@
+const session = require('express-session');
 const db = require('../models/db.js');
 const User = require('../models/UserModel.js');
 
@@ -16,10 +17,14 @@ const debugController = {
     },
 
     getTestPage: function(req, res) {
-        var testmessage = req.session.testmessage;
-        console.log(testmessage);
 
-        res.render( 'test' );
+        var logincredentials = {
+            username: req.session.username,
+            userid: req.session.userid,
+            email: req.session.email
+        }
+
+        res.render( 'test', logincredentials  );
     },
 
     getAll: function(req, res) {
