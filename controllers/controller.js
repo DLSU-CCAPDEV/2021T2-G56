@@ -8,6 +8,7 @@ const controller = {
     },
 
     getIndex: function(req, res) {
+        req.session.testmessage = 'this is a session test message hi :D';
         res.render('index');
     }
 
