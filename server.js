@@ -9,6 +9,12 @@ const session = require('express-session');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false
+}));
+
 app.set('view engine', 'ejs');
 
 dotenv.config();
