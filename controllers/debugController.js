@@ -24,7 +24,7 @@ const debugController = {
 
     getAll: function(req, res) {
         var testmessage = req.session.testmessage;
-        console.log(testmessage);
+        console.log( testmessage );
         
         db.findMany(User, {}, {}, {}, function(result) {
             console.log(result.length);
