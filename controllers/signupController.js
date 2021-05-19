@@ -19,10 +19,6 @@ const signupController = {
                             req.session.username = result.username
                             req.session.email = result.email
 
-                            var testsession = req.session.username;
-                            console.log(testsession);
-
-                            console.log( result.userid );
                             res.send( result );
 
                         } else {
