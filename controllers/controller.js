@@ -10,19 +10,12 @@ const controller = {
 
     getIndex: function(req, res) {
         if(req.session.logged) {
-            res.render('home');
+            db.findMany(Post, {}, {}, {}, function(result) {
+                res.render('home', {result} );
+            });
         } else {
             res.render('index');
         }
-    },
-
-    getHome: function(req, res) {
-        if(req.session.logged) {
-            res.render('home');
-        } else {
-            res.render('index');
-        }
-        
     }
 
 }

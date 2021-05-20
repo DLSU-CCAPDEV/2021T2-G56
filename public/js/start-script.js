@@ -55,7 +55,7 @@ $(document).ready(function() {
                         alert('try again');
                     } else {
                         console.log(result);
-                        window.location.href = '/home';
+                        window.location.href = '/';
                     }
                     
                 });
@@ -81,7 +81,7 @@ $(document).ready(function() {
                             
                             $.post('/createUser', { username: usernameInput, email: emailInput, password: passwordInput }, function(result) {
                                 console.log(result);
-                                window.location.href = '/home';
+                                window.location.href = '/';
                             } );
                         }
                     }
