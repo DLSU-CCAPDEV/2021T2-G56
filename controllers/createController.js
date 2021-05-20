@@ -26,6 +26,28 @@ const createController = {
         });  
     },
 
+    editPostPage: function(req, res) {
+        db.findOne(Post, {postid: req.params.postid}, {}, function(post) {
+            var sess = req.session;
+            res.render('editPostPage', {sess, post} );
+        });  
+    },
+
+    editPostConfirm: function(req, res) {
+
+        var entry = {
+            $set: {
+                postcaption: req.body.postcaption,
+                dateedited: Date.now()
+            }
+        }
+
+        db.updateOne(Post, { postid: req.body.postid }, entry, function(result) {
+            console.log(result);
+        });
+
+    },
+
     deletePost: function(req, res) {
         db.deleteOne(Post, { postid: req.body.postid }, function(result) {
             db.deleteMany(VotePost, { postparent: req.body.postid }, function(flag) {

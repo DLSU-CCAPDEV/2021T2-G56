@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit post</title>
+    <%- include('./partials/header.ejs') %>
+</head>
+<body>
+
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class='wrapper'>
+
+        <div class='postwall'>
+
+            <div id='<%= post.postid %>'class='selected-postbox selected-owned'>
+
+                <div class='selected-photo-column'>
+                    <img class ='selected-post-image' src='https://drive.google.com/uc?id=<%= post.imgurl %>&export=download'>
+                
+                </div>
+
+                <div class='selected-info-column'>
+                    
+                    <div class='selected-info-header'>
+
+
+                                <img class='post-profilepic' src='https://drive.google.com/uc?id=<%= post.profileimg %>&export=download'>
+
+
+                                <div class='poster-info'>
+                                    <div class='post-owner'>
+                                        <%= sess.username %>
+                                    </div>
+                                    <div class='post-location'>
+                                            <%= post.postlocation %>
+                                    </div>
+                                </div>
+                        
+                                
+                    </div>
+
+
+                    <div class='selected-info-body'>
+                        <span class='selected-post-text'>
+                            <p>
+                                <%= post.postcaption %>
+                            </p>
+                            
+                        </span>
+                        
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class='editingbox'>
+                <textarea class="editingbox-text" placeholder='new caption here...'></textarea>
+                <span>
+                    <input type='submit' class='editingbox-submit-button' value='submit'>
+                    <input type='submit' class='editingbox-cancel-button' value='cancel'>
+                </span>
+            </div>
+            
+
+
+        </div>
+    
+    
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

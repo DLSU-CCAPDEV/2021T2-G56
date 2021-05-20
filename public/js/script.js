@@ -161,7 +161,6 @@ $(document).ready(function() {
 //////////////////////////////////////////
 
 
-
 //FOR UPVOTING POSTS
     $(document).on('click','.fish',function() {
         var postparent = $(this).closest('.postbox').attr('id');
@@ -196,6 +195,7 @@ $(document).ready(function() {
     });
 //////////////////////////////////////////
 
+
 //FOR DOWNVOTING POSTS
     $(document).on('click','.fishbone',function() {
         var postparent = $(this).closest('.postbox').attr('id');
@@ -229,6 +229,42 @@ $(document).ready(function() {
     });
 //////////////////////////////////////////////
 
+
+//EDIT POST
+    $(document).on('click','.footer-2',function() {
+        var footer2 = $(this).text();
+        if(footer2=='edit') {
+            var postid = $(this).closest('.postbox').attr('id');
+            $.post('/edit/post', {postid: postid} );
+            
+        } else if(footer2=='save') {
+            //do nothing for now
+        } else {
+            //do nothing for now
+        }
+    });
+///////////////////////////////
+
+
+//EDIT POST ACCEPTED
+    $(document).on('click','.editingbox-submit-button',function() {
+        var postid = $('.selected-postbox').attr('id');
+        var postcaption = $('.editingbox-text').val();
+
+        $.post('/editPostConfirm', {postid: postid, postcaption: postcaption} );
+        alert('caption has been edited!');
+        window.location.replace("/");
+    });
+//////////////////////////////
+
+
+//EDIT POST CANCELED
+    $(document).on('click','.editingbox-cancel-button',function() {
+        window.location.replace("/");
+    });
+///////////////////////////////
+
+
 //DELETE POST
     $(document).on('click','.footer-3',function() {
         var footer3 = $(this).text();
@@ -245,6 +281,9 @@ $(document).ready(function() {
             alert('reporting...');  //future feature?
         }
     });
+///////////////////////////////
+
+
 
 
 
@@ -440,12 +479,9 @@ $(document).ready(function() {
         alert('this comment has been deleted!');
     });
 
-    //EDIT/////////////////////////////////////////////
+    // EDIT
 
-    //EDIT POST CANCELED
-    $(document).on('click','.editingbox-cancel-button',function() {
-        window.location.replace("/home");
-    });
+    ////////////////////////////////////////////////////////////
 
     //SETTINGS CANCELED
     $(document).on('click','.update-cancel-button',function() {
@@ -476,16 +512,7 @@ $(document).ready(function() {
         window.location.replace("/settings");
     });
 
-    //EDIT POST ACCEPTED
-    $(document).on('click','.editingbox-submit-button',function() {
-        var postID = $('.selected-postbox').attr('id');
-        var newCaption = $('.editingbox-text').val();
-
-        $.post('/editCaption', {postID: postID, newCaption: newCaption});
-        alert('caption has been edited!');
-        window.location.replace("/home");
-
-    });
+    
 
     //EDIT COMMENT IS ACCEPTED
     $(document).on('click','.comment-editingbox-submit-button',function() {

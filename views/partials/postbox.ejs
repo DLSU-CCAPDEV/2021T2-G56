@@ -72,7 +72,7 @@
             <hr class='post-hr'>
             <span class='footer-content'> <% if( post[i].ownerusername == sess.username) { %> 
                 <span class='footer-1'><a href='/post/<%= post[i].postid %>'>comments</a></span>&nbsp;|&nbsp;
-                <span class='footer-2'><a href='/edit/<%= post[i].postid %>'>edit</a></span>&nbsp;|&nbsp;
+                <span class='footer-2'><a href='edit/post/<%= post[i].postid %>'>edit</a></span>&nbsp;|&nbsp;
                 <span class='footer-3'><a href='#delete/<%= post[i].postid %>'>delete</a></span>
             </span> <% } else { %> 
                 <span class='footer-1'><a href='/post/<%= post[i].postid %>'>comments</a></span>&nbsp;|&nbsp;
