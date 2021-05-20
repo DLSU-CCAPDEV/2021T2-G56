@@ -15,6 +15,7 @@ const signupController = {
                     bcrypt.compare(req.body.password, result.password, function(err, equal) {
                         if(equal) {
 
+                            req.session.logged = true;
                             req.session.userid = result.userid;
                             req.session.username = result.username
                             req.session.email = result.email
@@ -69,6 +70,7 @@ const signupController = {
                 datecreated: Date.now()
             }
             db.insertOne(User, entry, function(flag){
+                req.session.logged = true;
                 res.send(entry);
             });
         });

@@ -7,12 +7,12 @@ var PostSchema = new mongoose.Schema({
         required: true
     },
     ownerid: {
-        type: String,
+        type: Number,
         required: true
     },
     postcaption: {
         type: String,
-        required: true
+        required: false
     },
     postlocation: {
         type: String,

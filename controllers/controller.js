@@ -9,11 +9,20 @@ const controller = {
     },
 
     getIndex: function(req, res) {
-        res.render('index');
+        if(req.session.logged) {
+            res.render('home');
+        } else {
+            res.render('index');
+        }
     },
 
     getHome: function(req, res) {
-        res.render('home');
+        if(req.session.logged) {
+            res.render('home');
+        } else {
+            res.render('index');
+        }
+        
     }
 
 }

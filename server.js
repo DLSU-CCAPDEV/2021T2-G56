@@ -102,26 +102,7 @@ const Post = require('./models/PostModel.js');
 
 app.post('/single', upload.single('image'), function(req, res) {
     uploadFile(req.file.originalname).then(imgurl => {
-
-        db.findMany(Post, {}, {}, { sort: {postid: -1} }, function(result) {
-
-            var entry = {
-                postid: result[0].postid + 1,
-                ownerid: 'urmom',
-                postcaption: 'nanaymo',
-                postlocation: 'agno',
-                imgurl: imgurl,
-                datecreated: Date.now(),
-                upvotecount: 0
-            }
-
-            db.insertOne(Post, entry, function(flag){
-                res.send(entry);
-            });
-
-        });
-
-
+        res.send(imgurl);
     });
 });
 

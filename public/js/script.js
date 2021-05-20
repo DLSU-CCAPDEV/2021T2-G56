@@ -25,8 +25,19 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             type: 'POST',
-            'success': function(result){
-                console.log('File uploaded successfully!');
+            'success': function(imgurl){
+                console.log(imgurl);
+                var entry = {
+                    caption: caption,
+                    imgurl: imgurl
+                }
+
+                console.log(entry);
+
+                $.post('/createPost', entry, function () {
+                    console.log('File uploaded successfully!');
+                });
+                
             }
         });
 
