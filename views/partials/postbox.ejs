@@ -1,10 +1,31 @@
 
 <div class='postbox <% if( post[i].ownerusername == sess.username) { %> owned <% } %>' id='<%= post[i].postid %>'>
-    <div class='vote-column'>
-        <div class='fish'></div>
-        <div class='upvote-count'> <%= post[i].upvotecount %> </div>
-        <div class='fishbone'></div>
-    </div>
+
+
+    <% for(var x = 0; x < votepost.length; x++) { %>
+        <% if(post[i].postid == votepost[x].postparent) { %>
+            <% if(votepost[x].votetype == 'upvote') { %>
+                <div class='vote-column'>
+                    <div class='fish upvoted'></div>
+                    <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+                    <div class='fishbone'></div>
+                </div>
+            <% } else if(votepost[x].votetype == 'downvote'){ %>
+                <div class='vote-column'>
+                    <div class='fish'></div>
+                    <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+                    <div class='fishbone downvoted'></div>
+                </div>
+            <% } else { %>
+                <div class='vote-column'>
+                    <div class='fish'></div>
+                    <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+                    <div class='fishbone'></div>
+                </div>
+            <% } %>
+        <% } %>
+    <% } %>
+    
 
     <div class='photo-column'>
         <a href='/post/<%= post[i].postid %>'>

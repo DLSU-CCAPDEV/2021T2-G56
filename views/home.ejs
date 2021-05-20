@@ -20,7 +20,7 @@
         
             <div class='postlist'>
                 <% for(i=0; i< post.length; i++ ) { %>
-                    <%- include('./partials/postbox', {i, sess} ) %>
+                    <%- include('./partials/postbox', {i, sess, votepost} ) %>
                 <% } %>
 
             </div>

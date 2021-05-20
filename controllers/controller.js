@@ -12,8 +12,10 @@ const controller = {
     getIndex: function(req, res) {
         if(req.session.logged) {
             db.findMany(Post, {}, {}, {}, function(post) {
-                var sess = req.session;
-                res.render('home', {post, sess} );
+                db.findMany(VotePost, {voteowner: req.session.username}, {}, {}, function(votepost) {
+                    var sess = req.session;
+                    res.render('home', {post, sess, votepost} );
+                });
             });
         } else {
             res.render('index');
