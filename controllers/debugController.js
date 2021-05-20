@@ -1,6 +1,7 @@
 const session = require('express-session');
 const db = require('../models/db.js');
 const User = require('../models/UserModel.js');
+const Post = require('../models/PostModel.js');
 
 const debugController = {
 

@@ -25,8 +25,8 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             type: 'POST',
-            'success': function(){
-                console.log('File successfully uploaded.');
+            'success': function(result){
+                console.log('File uploaded successfully!');
             }
         });
 
