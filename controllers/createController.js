@@ -36,7 +36,7 @@ const createController = {
 
         db.findOne(VotePost, query, {}, function(result) {
             if(result) {
-                console.log('exist');
+                console.log('Updating vote');
                 var entry = {
                     $set: {
                         votetype: req.body.votetype,
@@ -44,10 +44,17 @@ const createController = {
                     }
                 }
                 db.updateOne(VotePost, query, entry, function(result) {
-                    console.log(result);
+                    var entry = {
+                        $set: {
+                            upvotecount: req.body.upvotecount,
+                        }
+                    }
+                    db.updateOne(Post, {postid: req.body.postparent}, entry, function(result) {
+                        console.log(result);
+                    });
                 });
             } else {
-                console.log('Vote does not exist. Making one now...');
+                console.log('Creating vote');
                 db.findMany(VotePost, {}, {}, { sort: {voteid: -1} }, function(result) {
                     var entry = {
                         voteid: result[0].voteid + 1,
@@ -57,7 +64,15 @@ const createController = {
                         votedate: Date.now()
                     }
                     db.insertOne(VotePost, entry, function(flag){
-                        res.send(entry);
+                        var entry = {
+                            $set: {
+                                upvotecount: req.body.upvotecount,
+                            }
+                        }
+                        db.updateOne(Post, {postid: req.body.postparent}, entry, function(result) {
+                            console.log(result);
+                            res.send(entry);
+                        });
                     });
 
                 });
@@ -65,7 +80,6 @@ const createController = {
         });
 
     }
-
 }
 
 module.exports = createController;

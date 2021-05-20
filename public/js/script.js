@@ -161,7 +161,7 @@ $(document).ready(function() {
 
 
 
-//FOR UPVOTING AND DOWNVOTING POSTS
+//FOR UPVOTING POSTS
     $(document).on('click','.fish',function() {
         var postparent = $(this).closest('.postbox').attr('id');
         if(postparent == null) {
@@ -188,43 +188,43 @@ $(document).ready(function() {
         }
 
         upvotecountString = $(this).siblings('.upvote-count').text();
-        upvotecountInt = parseInt(upvotecountString)
+        upvotecountInt = parseInt(upvotecountString);
         
-        // alert(postID); //debugging purposes
         $.post('/votePost', {postparent: postparent, upvotecount: upvotecountInt, votetype: votetype});
 
     });
+//////////////////////////////////////////
 
+//FOR DOWNVOTING POSTS
     $(document).on('click','.fishbone',function() {
-        var postID = $(this).closest('.postbox').attr('id');
-        if(postID == null) {
-            postID = $(this).closest('.selected-postbox ').attr('id');
+        var postparent = $(this).closest('.postbox').attr('id');
+        if(postparent == null) {
+            postparent = $(this).closest('.selected-postbox ').attr('id');
         }
 
-        var type = 'none';
-        var counterString = $(this).siblings('.upvote-count').text();
-        var counterInt = parseInt(counterString);
+        var votetype = 'none';
+        var upvotecountString = $(this).siblings('.upvote-count').text();
+        var upvotecountInt = parseInt(upvotecountString);
 
         if($(this).siblings('.fish').hasClass('upvoted')) {
             $(this).siblings('.fish').removeClass('upvoted');
             $(this).addClass('downvoted');
-            $(this).siblings('.upvote-count').text(counterInt-2);
-            type = 'downvote';
+            $(this).siblings('.upvote-count').text(upvotecountInt-2);
+            votetype = 'downvote';
         } else if($(this).hasClass('downvoted')) {
             $(this).removeClass('downvoted');
-            $(this).siblings('.upvote-count').text(counterInt+1);
-            type = 'none';
+            $(this).siblings('.upvote-count').text(upvotecountInt+1);
+            votetype = 'none';
         } else {
             $(this).addClass('downvoted');
-            $(this).siblings('.upvote-count').text(counterInt-1);
-            type = 'downvote';
+            $(this).siblings('.upvote-count').text(upvotecountInt-1);
+            votetype = 'downvote';
         }
 
-        counterString = $(this).siblings('.upvote-count').text();
-        var upvoteOwner = $('.profile-link').attr('id');
+        upvotecountString = $(this).siblings('.upvote-count').text();
+        upvotecountInt = parseInt(upvotecountString);
         
-        // alert(postID); //debugging purposes
-        $.post('/postCountUpdate', {postID: postID, counterString: counterString, upvoteOwner: upvoteOwner, type: type});
+        $.post('/votePost', {postparent: postparent, upvotecount: upvotecountInt, votetype: votetype});
     });
 //////////////////////////////////////////////
 
