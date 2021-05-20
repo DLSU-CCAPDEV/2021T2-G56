@@ -17,8 +17,8 @@ const signupController = {
 
                             req.session.logged = true;
                             req.session.userid = result.userid;
-                            req.session.username = result.username
-                            req.session.email = result.email
+                            req.session.username = result.username;
+                            req.session.email = result.email;
 
                             res.send( result );
 

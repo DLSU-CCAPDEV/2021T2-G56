@@ -10,6 +10,10 @@ var PostSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    ownerusername: {
+        type: String,
+        required: true
+    },
     postcaption: {
         type: String,
         required: false

@@ -11,6 +11,7 @@ const createController = {
             var entry = {
                 postid: result[0].postid + 1,
                 ownerid: req.session.userid,
+                ownerusername: req.session.username,
                 postcaption: req.body.caption,
                 postlocation: 'Agno, Taft Ave.',
                 imgurl: req.body.imgurl,
@@ -19,7 +20,7 @@ const createController = {
             }
 
             db.insertOne(Post, entry, function(flag){
-                console.log(flag);
+                res.send(entry);
             });
         });
 
