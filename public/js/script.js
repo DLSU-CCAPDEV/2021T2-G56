@@ -161,39 +161,37 @@ $(document).ready(function() {
 
 
 
-
-
 //FOR UPVOTING AND DOWNVOTING POSTS
     $(document).on('click','.fish',function() {
-        var postID = $(this).closest('.postbox').attr('id');
-        if(postID == null) {
-            postID = $(this).closest('.selected-postbox ').attr('id');
+        var postparent = $(this).closest('.postbox').attr('id');
+        if(postparent == null) {
+            postparent = $(this).closest('.selected-postbox ').attr('id');
         }
 
-        var type = 'none';
-        var counterString = $(this).siblings('.upvote-count').text();
-        var counterInt = parseInt(counterString);
+        var votetype = 'none';
+        var upvotecountString = $(this).siblings('.upvote-count').text();
+        var upvotecountInt = parseInt(upvotecountString);
 
         if($(this).siblings('.fishbone').hasClass('downvoted')) {
             $(this).siblings('.fishbone').removeClass('downvoted');
             $(this).addClass('upvoted');
-            $(this).siblings('.upvote-count').text(counterInt+2);
-            type = 'upvote';
+            $(this).siblings('.upvote-count').text(upvotecountInt+2);
+            votetype = 'upvote';
         } else if($(this).hasClass('upvoted')) {
             $(this).removeClass('upvoted');
-            $(this).siblings('.upvote-count').text(counterInt-1);
-            type = 'none';
+            $(this).siblings('.upvote-count').text(upvotecountInt-1);
+            votetype = 'none';
         } else {
             $(this).addClass('upvoted');
-            $(this).siblings('.upvote-count').text(counterInt+1);
-            type = 'upvote';
+            $(this).siblings('.upvote-count').text(upvotecountInt+1);
+            votetype = 'upvote';
         }
 
-        counterString = $(this).siblings('.upvote-count').text();
-        var upvoteOwner = $('.profile-link').attr('id');
+        upvotecountString = $(this).siblings('.upvote-count').text();
+        upvotecountInt = parseInt(upvotecountString)
         
         // alert(postID); //debugging purposes
-        $.post('/postCountUpdate', {postID: postID, counterString: counterString, upvoteOwner: upvoteOwner, type: type});
+        $.post('/votePost', {postparent: postparent, upvotecount: upvotecountInt, votetype: votetype});
 
     });
 

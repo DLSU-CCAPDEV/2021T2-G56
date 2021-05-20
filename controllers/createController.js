@@ -1,6 +1,7 @@
 const db = require('../models/db.js');
 const User = require('../models/UserModel.js');
 const Post = require('../models/PostModel.js');
+const VotePost = require('../models/VotePostModel.js');
 
 const createController = {
 
@@ -23,9 +24,46 @@ const createController = {
             db.insertOne(Post, entry, function(flag){
                 res.send(entry);
             });
+        });  
+    },
+
+    votePost: function(req, res) {
+
+        var query = {
+            voteowner: req.session.username,         
+            postparent: req.body.postparent,
+        }
+
+        db.findOne(VotePost, query, {}, function(result) {
+            if(result) {
+                console.log('exist');
+                var entry = {
+                    $set: {
+                        votetype: req.body.votetype,
+                        votedate: Date.now()
+                    }
+                }
+                db.updateOne(VotePost, query, entry, function(result) {
+                    console.log(result);
+                });
+            } else {
+                console.log('Vote does not exist. Making one now...');
+                db.findMany(VotePost, {}, {}, { sort: {voteid: -1} }, function(result) {
+                    var entry = {
+                        voteid: result[0].voteid + 1,
+                        voteowner: req.session.username,         
+                        postparent: req.body.postparent,
+                        votetype: req.body.votetype,
+                        votedate: Date.now()
+                    }
+                    db.insertOne(VotePost, entry, function(flag){
+                        res.send(entry);
+                    });
+
+                });
+            }
         });
 
-        
     }
 
 }

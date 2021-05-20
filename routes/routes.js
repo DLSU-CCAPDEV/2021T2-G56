@@ -11,6 +11,7 @@ app.get(`/`, controller.getIndex);
 app.post(`/checkExistence`, signupController.postCheckExistence);
 app.post(`/createUser`, signupController.postCreateUser);
 app.post(`/createPost`, createController.createPost);
+app.post(`/votePost`, createController.votePost);
 
 app.get(`/debug/user/:username`, debugController.getTestUser);
 app.get(`/debug/page`, debugController.getTestPage);

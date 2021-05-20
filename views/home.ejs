@@ -19,7 +19,9 @@
             </div>
         
             <div class='postlist'>
-                <%= result.length %>
+                <% for(i=0; i< post.length; i++ ) { %>
+                    <%- include('./partials/postbox', {i, sess} ) %>
+                <% } %>
 
             </div>
             

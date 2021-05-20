@@ -1,0 +1,59 @@
+
+<div class='postbox <% if( post[i].ownerusername == sess.username) { %> owned <% } %>' id='<%= post[i].postid %>'>
+    <div class='vote-column'>
+        <div class='fish'></div>
+        <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+        <div class='fishbone'></div>
+    </div>
+
+    <div class='photo-column'>
+        <a href='/post/<%= post[i].postid %>'>
+            <img class ='post-image' src='https://drive.google.com/uc?id=<%= post[i].imgurl %>&export=download'>
+        </a>
+    </div>
+
+    <div class='info-column'>
+        
+        <div class='info-header'>
+            <a class='poster-link' href='/user/<%= post[i].ownerusername %>'>
+                <img class='post-profilepic' src='https://drive.google.com/uc?id=<%= post[i].profileimg %>&export=download'>
+                <div class='poster-info'>
+                    <div class='post-owner'>
+                        <%= post[i].ownerusername %>
+                    </div>
+                    <div class='post-location'>
+                        <a class='location-link' href='#location'>
+                            <%= post[i].postlocation %>
+                        </a>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class='info-body'>
+            <span class='post-text'>
+                <p>
+                    <%= post[i].postcaption %>
+                </p>
+                
+            </span>
+            
+        </div>
+        <div class='info-footer'>
+            <hr class='post-hr'>
+            <span class='footer-content'> <% if( post[i].ownerusername == sess.username) { %> 
+                <span class='footer-1'><a href='/post/<%= post[i].postid %>'>comments</a></span>&nbsp;|&nbsp;
+                <span class='footer-2'><a href='/edit/<%= post[i].postid %>'>edit</a></span>&nbsp;|&nbsp;
+                <span class='footer-3'><a href='#delete/<%= post[i].postid %>'>delete</a></span>
+            </span> <% } else { %> 
+                <span class='footer-1'><a href='/post/<%= post[i].postid %>'>comments</a></span>&nbsp;|&nbsp;
+                <span class='footer-2'><a href='#report/<%= post[i].postid %>'>report</a></span>
+            </span>
+            <% } %> 
+        
+        
+        </div>
+    </div>
+
+</div>
