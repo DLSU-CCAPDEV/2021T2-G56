@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const UserModel = require('./UserModel.js');
 const PostModel = require('./PostModel.js');
 const VotePostModel = require('./VotePostModel.js');
+const VoteCommentModel = require('./VoteCommentModel.js');
+const CommentModel = require('./CommentModel.js');
 
 
 const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/catsallian-database?retryWrites=true&w=majority';

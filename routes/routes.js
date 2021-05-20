@@ -10,6 +10,7 @@ app.get(`/favicon.ico`, controller.getFavicon);
 app.get(`/`, controller.getIndex);
 app.post(`/checkExistence`, signupController.postCheckExistence);
 app.post(`/createUser`, signupController.postCreateUser);
+app.get('/post/:postid', controller.getPost);
 
 app.post(`/createPost`, createController.createPost);
 app.get('/edit/post/:postid', createController.editPostPage);
