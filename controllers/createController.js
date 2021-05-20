@@ -8,7 +8,6 @@ const createController = {
     createPost: function(req, res) {
         
         db.findMany(Post, {}, {}, { sort: {postid: -1} }, function(result) {
-
             var entry = {
                 postid: result[0].postid + 1,
                 ownerid: req.session.userid,
@@ -25,6 +24,14 @@ const createController = {
                 res.send(entry);
             });
         });  
+    },
+
+    deletePost: function(req, res) {
+        db.deleteOne(Post, { postid: req.body.postid }, function(result) {
+            db.deleteMany(VotePost, { postparent: req.body.postid }, function(flag) {
+                res.send(flag);
+            });
+        });
     },
 
     votePost: function(req, res) {

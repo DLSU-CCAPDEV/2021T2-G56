@@ -23,7 +23,7 @@ $(document).ready(function() {
             voteColumnDiv.append(fishDiv);
                 var upvoteCountDiv = document.createElement('div');
                 upvoteCountDiv.setAttribute('class','upvote-count');
-                upvoteCountDiv.append(postdetails.upvotecount);
+                upvoteCountDiv.append('0');
             voteColumnDiv.append(upvoteCountDiv);
                 var fishboneDiv = document.createElement('div');
                 fishboneDiv.setAttribute('class','fishbone');
@@ -146,6 +146,7 @@ $(document).ready(function() {
 
                 $.post('/createPost', entry, function (postdetails) {
                     alert('File uploaded successfully!');
+                    console.log(postdetails);
                     createPost(postdetails);
                 });
                 
@@ -228,6 +229,24 @@ $(document).ready(function() {
     });
 //////////////////////////////////////////////
 
+//DELETE POST
+    $(document).on('click','.footer-3',function() {
+        var footer3 = $(this).text();
+        if(footer3=='delete') {
+            var postid = $(this).closest('.postbox').attr('id');
+
+            $.post('/deletePost', {postid: postid} );
+            alert('post has been deleted!');
+            $(this).closest('.postbox').remove();
+            
+        } else if(footer3=='share') {
+            alert('sharing...'); //future feature?
+        } else {
+            alert('reporting...');  //future feature?
+        }
+    });
+
+
 
 //FOR UPVOTING AND DOWNVOTING COMMENTS
     $(document).on('click','.comment-fish',function() {
@@ -258,6 +277,7 @@ $(document).ready(function() {
         // alert(postID); //debugging purposes
         $.post('/commentCountUpdate', {commentID: commentID, counterString: counterString, upvoteOwner: upvoteOwner, type: type});
     });
+    
 
     $(document).on('click','.comment-fishbone',function() {
         var commentID = $(this).closest('.commentbox').attr('id');
@@ -395,23 +415,6 @@ $(document).ready(function() {
 
     });
 ////////////////////////////////////////
-
-    //DELETE POST
-    $(document).on('click','.footer-3',function() {
-        var footer3 = $(this).text();
-        if(footer3=='delete') {
-            var postID = $(this).closest('.postbox').attr('id');
-            $(this).closest('.postbox').remove();
-
-            $.post('/deletePost', {postID: postID});
-            alert('post has been deleted!');
-            
-        } else if(footer3=='share') {
-            alert('sharing...'); //future feature?
-        } else {
-            alert('reporting...');  //future feature?
-        }
-    });
 
     //DELETE POST AT SELECTED PAGE
     $(document).on('click','.selected-footer-2',function() {

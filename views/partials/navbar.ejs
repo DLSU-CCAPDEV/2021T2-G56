@@ -1,0 +1,70 @@
+<nav class='navbar'>
+
+        <a class='profile-link' id='<%= sess.username %>' href='/user/<%= sess.username %>'>
+            <div class='nav-item'>
+                
+                <img class='profilepic' src='https://drive.google.com/uc?id=<%= sess.profileimg %>&export=download'>
+                <span class='profile-text'>my&nbsp;page</span>
+
+            </div>
+        </a>
+
+
+        <a class='nav-link' href='/'>
+            <div class='nav-item'>
+                
+                <span class='nav-text'>home</span>
+                <div class='home'></div>
+                
+
+            </div>
+        </a>
+
+        <a class='nav-link' href='/popular'>
+            <div class='nav-item'>
+                
+                <div class='nav-text'>popular</div>
+                <div class='popular'></div>
+                
+
+            </div>
+        </a>
+        
+        <a class='nav-link' href='/trending'>
+            <div class='nav-item'>
+                
+                <div class='nav-text'>trending</div>
+                <div class='trending'></div>
+                
+
+            </div>
+        </a>
+
+
+        <a class='nav-link' href='/new'>
+            <div class='nav-item'>
+                
+                <div class='nav-text'>new</div>
+                <div class='new'></div>
+                
+
+            </div>
+        </a>
+
+        <a class='nav-link' href='/settings'>
+            <div class='nav-item'>
+                
+                <div class='nav-text'>settings</div>
+                <div class='settings'></div>
+                
+
+            </div>
+        </a>
+
+        <hr class='footerline'>
+        
+        <div class='footer-contents'>
+            <a href='#tos'>Terms of service</a> | <a href='#pp'>Privacy policy</a>
+            <br>catsallian 2021
+        </div>
+    </nav>
