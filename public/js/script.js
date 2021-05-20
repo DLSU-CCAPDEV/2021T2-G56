@@ -13,12 +13,27 @@ $(document).ready(function() {
 //CREATING A SINGLE POST ON HOME PAGE
     $('.submit-button').on('click',function() {
         var caption = $('.postingbox-text').val();
-        var filename = $('.upload-button').val();
-        
+        var image = $('.upload-button')[0].files[0];
+
+        var formdata = new FormData();
+        formdata.append('image',image);
+
+
+        $.ajax({
+            url: '/single',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            'success': function(){
+                console.log('File successfully uploaded.');
+            }
+        });
+
+
         $('.postingbox-text').val('');
         $('.upload-button').val('');
 
-        alert('caption: '+caption+'\n filename:'+filename);
 
         // $.post('/createPost', {caption: caption, filename: filename}, function ( {createdPostDetails, postOwnerDetails} ) {
         //     // alert(createdPostDetails.caption); //debugging purposes only

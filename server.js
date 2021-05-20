@@ -46,7 +46,7 @@ const drive = google.drive({
 });
 
 const filePath = './public/images/uploadedimg.png';
-const uploadsFolder = '13WR4NcjSdjgTff6EKTEdEpcCD7geYHvy';
+const uploadsFolder = '1NCAJycgdrSufPKuTvScA589zOd9Kl7Vb';
 const profileimgFolder = '1VIJ7-Z5WOs4G7e1B7y5OTpQ8D9fPwrJc';
 const backgroundimgFolder = '1YhUG_W5XfZXgru7wt8Ik_Y5RcxwACNrj';
 
@@ -59,9 +59,9 @@ async function uploadFile(filename) {
   try {
     const response = await drive.files.create({
       requestBody: {
-        name: Date.now() + ' -- ' + filename, //This can be name of your choice
+        name: Date.now() + ' -- ' + filename,
         mimeType: 'image/png',
-        parents: [folderId]
+        parents: [uploadsFolder]
       },
       media: {
 		mimeType: 'image/png',
@@ -84,13 +84,12 @@ async function uploadFile(filename) {
   }
 }
 
-
 var fileStorageEngine = multer.diskStorage({
     destination: function (req,file,cb) {
-        cb(null,'./images');
+        cb(null,'./public/images');
     },
     filename: function (req, file, cb) {
-        cb(null, 'tempimg.png');
+        cb(null, 'uploadedimg.png');
     }
 
 });
