@@ -14,6 +14,31 @@ function createPost(postdetails) {
     var postboxDiv = document.createElement('div');
     postboxDiv.setAttribute('class','postbox owned');
     postboxDiv.setAttribute('id',postdetails.postid);
+        var voteColumnDiv = document.createElement('div');
+        voteColumnDiv.setAttribute('class','vote-column');
+            var fishDiv = document.createElement('div');
+            fishDiv.setAttribute('class','fish');
+        voteColumnDiv.append(fishDiv);
+            var upvoteCountDiv = document.createElement('div');
+            upvoteCountDiv.setAttribute('class','upvote-count');
+            upvoteCountDiv.append(postdetails.upvotecount);
+        voteColumnDiv.append(upvoteCountDiv);
+            var fishboneDiv = document.createElement('div');
+            fishboneDiv.setAttribute('class','fishbone');
+        voteColumnDiv.append(fishboneDiv);
+    postboxDiv.append(voteColumnDiv);
+        var photoColumnDiv = document.createElement('div');
+        photoColumnDiv.setAttribute('class','photo-column');
+            var imgLinkA = document.createElement('a');
+            imgLinkA.setAttribute('href','/post/'+postdetails.postid);
+                var postImageImg = document.createElement('img');
+                postImageImg.setAttribute('class','post-image');
+                // https://drive.google.com/uc?id=[ID HERE]&export=download
+                postImageImg.setAttribute('src','https://drive.google.com/uc?id='+postdetails.imgurl+'&export=download');
+            imgLinkA.append(postImageImg);
+        photoColumnDiv.append(imgLinkA);
+    postboxDiv.append(photoColumnDiv);
+
 
     $('.postlist').prepend(postboxDiv);
     $('.postingbox').removeClass('postingbox-focused');
