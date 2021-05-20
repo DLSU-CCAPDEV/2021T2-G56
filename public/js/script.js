@@ -101,7 +101,7 @@ $(document).ready(function() {
                         var footer2Span = document.createElement('span');
                         footer2Span.setAttribute('class','footer-2');
                             var reportA = document.createElement('a');
-                            reportA.setAttribute('href','/edit/'+postdetails.postid);
+                            reportA.setAttribute('href','/edit/post/'+postdetails.postid);
                             reportA.append('edit');
                         footer2Span.append(reportA);
                     footerContentSpan.append(footer2Span);
