@@ -1,63 +1,197 @@
 $(document).ready(function() {
 
 
-//REGISTRATION VERIFICATION 
-    $(document).on('keyup', '.email-registration',function() {
-        var emailinput = $(this).val();
+//POSTBOX ENLARGES WHEN FOCUSED ON
+    $('.postingbox-text').on('click',function() {
+        $(this).addClass('postingbox-text-focused');
+        $(this).parents('.postingbox').addClass('postingbox-focused');
+        $(this).siblings('.upload-button').css('display','inline-block');
+        $(this).siblings('.submit-button').css('display','inline-block');
+    });
+/////////////////////////////////////////////////
 
-        $.get('/checkEmail', {email: emailinput}, function (result) {
-            if(result.email == emailinput) {
-                alert('Account with that email already exists!');
-                $('.email-registration').val('');
-        }
-        });
+//CREATING A SINGLE POST ON HOME PAGE
+    $('.submit-button').on('click',function() {
+        var caption = $('.postingbox-text').val();
+        var filename = $('.upload-button').val();
+        
+        $('.postingbox-text').val('');
+        $('.upload-button').val('');
+
+        alert('caption: '+caption+'\n filename:'+filename);
+
+        // $.post('/createPost', {caption: caption, filename: filename}, function ( {createdPostDetails, postOwnerDetails} ) {
+        //     // alert(createdPostDetails.caption); //debugging purposes only
+        //     // alert(postOwnerDetails.username);
+
+        //     var postboxDiv = document.createElement('div');
+        //     postboxDiv.setAttribute('class','postbox owned');
+        //     postboxDiv.setAttribute('id',createdPostDetails._id);
+
+        //         var voteColumnDiv = document.createElement('div');
+        //         voteColumnDiv.setAttribute('class','vote-column');
+
+        //             var fishDiv = document.createElement('div');
+        //             fishDiv.setAttribute('class','fish');
+        //             voteColumnDiv.append(fishDiv);
+
+        //             var upvoteCountDiv = document.createElement('div');
+        //             upvoteCountDiv.setAttribute('class','upvote-count');
+        //             upvoteCountDiv.append(createdPostDetails.likes);
+        //             voteColumnDiv.append(upvoteCountDiv);
+
+        //             var fishboneDiv = document.createElement('div');
+        //             fishboneDiv.setAttribute('class','fishbone');
+
+        //         voteColumnDiv.append(fishboneDiv);
+
+        //     postboxDiv.append(voteColumnDiv);
+
+        //         var photoColumnDiv = document.createElement('div');
+        //         photoColumnDiv.setAttribute('class','photo-column');
+
+        //             var imgLinkA = document.createElement('a');
+        //             imgLinkA.setAttribute('href','/post/'+createdPostDetails._id);
+                    
+        //                 var postImageImg = document.createElement('img');
+        //                 postImageImg.setAttribute('class','post-image');
+        //                 postImageImg.setAttribute('src',createdPostDetails.imgurl);
+
+        //             imgLinkA.append(postImageImg);
+
+        //         photoColumnDiv.append(imgLinkA);
+
+        //     postboxDiv.append(photoColumnDiv);
+
+        //         var infoColumnDiv = document.createElement('div');
+        //         infoColumnDiv.setAttribute('class','info-column');
+
+        //             var infoHeaderDiv = document.createElement('div');
+        //             infoHeaderDiv.setAttribute('class','info-header'); 
+
+        //                 var posterLinkA = document.createElement('a');
+        //                 posterLinkA.setAttribute('class','poster-link'); 
+        //                 posterLinkA.setAttribute('href','/user/'+postOwnerDetails.username);
+
+        //                     var postProfilePicImg = document.createElement('img');
+        //                     postProfilePicImg.setAttribute('class','post-profilepic'); 
+        //                     postProfilePicImg.setAttribute('src',postOwnerDetails.profileimg); 
+
+        //                 posterLinkA.append(postProfilePicImg);
+        
+        //             infoHeaderDiv.append(posterLinkA);
+
+        //                 var posterInfoDiv = document.createElement('div');
+        //                 posterInfoDiv.setAttribute('class','poster-info');
+
+        //                     posterLinkA = document.createElement('a');
+        //                     posterLinkA.setAttribute('class','poster-link');
+        //                     posterLinkA.setAttribute('href','/user/'+postOwnerDetails.username);
+
+        //                         var postOwnerDiv = document.createElement('div');
+        //                         postOwnerDiv.setAttribute('class','post-owner');
+        //                         postOwnerDiv.append(postOwnerDetails.username);
+                                
+        //                     posterLinkA.append(postOwnerDiv);
+
+        //                 posterInfoDiv.append(posterLinkA);
+
+        //                     var postLocationDiv = document.createElement('div');
+        //                     postLocationDiv.setAttribute('class','post-location');
+
+        //                         posterLinkA = document.createElement('a');
+        //                         posterLinkA.setAttribute('class','poster-link');
+        //                         posterLinkA.setAttribute('href','/user/'+postOwnerDetails.username);
+                            
+        //                     postLocationDiv.append(posterLinkA);
+
+        //                         locationLinkA = document.createElement('a');
+        //                         locationLinkA.setAttribute('href','#location');
+        //                         locationLinkA.append(createdPostDetails.location);
+
+        //                     postLocationDiv.append(locationLinkA);
+
+        //                 posterInfoDiv.append(postLocationDiv);
+
+        //             infoHeaderDiv.append(posterInfoDiv);
+                
+        //         infoColumnDiv.append(infoHeaderDiv);
+
+        //             var infoBodyDiv = document.createElement('div');
+        //             infoBodyDiv.setAttribute('class','info-body');
+
+        //                 var postTextSpan = document.createElement('span');
+        //                 postTextSpan.setAttribute('class','post-text');
+
+        //                     var captionP = document.createElement('p');
+        //                     captionP.append(createdPostDetails.caption);
+
+        //                 postTextSpan.append(captionP);
+        //             infoBodyDiv.append(postTextSpan);
+
+        //         infoColumnDiv.append(infoBodyDiv);
+
+        //             var infoFooterDiv = document.createElement('div');
+        //             infoFooterDiv.setAttribute('class','info-footer');
+
+        //                 var postHR = document.createElement('hr');
+        //                 postHR.setAttribute('class','post-hr');
+
+        //             infoFooterDiv.append(postHR);
+
+        //                 var footerContentSpan = document.createElement('span');
+        //                 footerContentSpan.setAttribute('class','footer-content');
+
+        //                     footer1Span = document.createElement('span');
+        //                     footer1Span.setAttribute('class','footer-1');
+
+        //                         var saveA = document.createElement('a');
+        //                         saveA.setAttribute('href','/post/'+createdPostDetails._id);
+        //                         saveA.append('comments');
+
+        //                     footer1Span.append(saveA);
+        //                 footerContentSpan.append(footer1Span);
+        //                 footerContentSpan.append(' | ');
+
+        //                     var footer2Span = document.createElement('span');
+        //                     footer2Span.setAttribute('class','footer-2');
+
+        //                         var reportA = document.createElement('a');
+        //                         reportA.setAttribute('href','/edit/'+createdPostDetails._id);
+        //                         reportA.append('edit');
+
+        //                     footer2Span.append(reportA);
+                                         
+        //                 footerContentSpan.append(footer2Span);
+        //                 footerContentSpan.append(' | ');
+                        
+        //                     var footer3Span = document.createElement('span');
+        //                     footer3Span.setAttribute('class','footer-3');
+
+        //                         var optionsA = document.createElement('a');
+        //                         optionsA.setAttribute('href','#delete'+createdPostDetails._id);
+        //                         optionsA.append('delete');
+        //                     footer3Span.append(optionsA);
+        //                 footerContentSpan.append(footer3Span);
+        //             infoFooterDiv.append(footerContentSpan);
+        //         infoColumnDiv.append(infoFooterDiv);
+
+
+        //     postboxDiv.append(infoColumnDiv);
+        //     $('.postlist').prepend(postboxDiv);
+
+        //     $('.postingbox').removeClass('postingbox-focused');
+        //     $('.postingbox-text').removeClass('postingbox-text-focused');
+        //     $('.upload-button').css('display','none');
+        //     $('.submit-button').css('display','none');
+        // });
 
     });
+//////////////////////////////////////////
 
-    $(document).on('keyup', '.username-input',function() {
-        var usernameInput = $(this).val();
 
-        $.get('/checkUsername', {username: usernameInput}, function (result) {
-            if(result.username == usernameInput) {
-                alert('Account with that username already exists!');
-                $('.username-input').val('');
-            }
-        });
 
-    });
-//////////////////////////////////////////////////////////////////
 
-//LOGIN OPTIONS WHEN YOU PRESS THE USER BUTTON
-    $('.login-options').on('click',function() {
-        if($('.username-input').hasClass('invisible')) {
-            $(this).text('old user?');
-
-            $('.username-input').val('');
-            $('.email-input').val('');
-            $('.password-input').val('');
-
-            $('.loginform').attr('action','/register');
-            $('.login-button').attr('value','register');
-            $('.email-input').val('');
-            $('.email-input').addClass('email-registration');
-            $('.username-input').removeClass('invisible');
-            $('.invalid').addClass('invisible');
-        } else {
-            $(this).text('new user?');
-
-            $('.email-input').val('');
-            $('.password-input').val('');
-
-            $('.loginform').attr('action','/login');
-            $('.email-input').removeClass('email-registration');
-            
-            $('.login-button').attr('value','connect');
-            $('.username-input').addClass('invisible');
-            
-        }
-    });
-    
-///////////////////////////////////////////
 
 //FOR UPVOTING AND DOWNVOTING POSTS
     $(document).on('click','.fish',function() {
@@ -187,191 +321,8 @@ $(document).ready(function() {
     });
 //////////////////////////////////////////////
 
-//ON FOCUS ENLARGEMENT FEATURE
-    $('.postingbox-text').on('click',function() {
-        $(this).addClass('postingbox-text-focused');
-        $(this).parents('.postingbox').addClass('postingbox-focused');
-        $(this).siblings('.upload-button').css('display','inline-block');
-        $(this).siblings('.submit-button').css('display','inline-block');
-    });
-/////////////////////////////////////////////////
-
-//CREATING POSTS
-    $('.submit-button').on('click',function() {
-        var caption = $('.postingbox-text').val();
-        $('.postingbox-text').val('');
-        var filenameUncleaned = $('.upload-button').val();
-        $('.upload-button').val('');
-        var filename = filenameUncleaned.replace(/^C:\\fakepath\\/, "/images/catdatabase/");
-
-        $.post('/createPost', {caption: caption, filename: filename}, function ( {createdPostDetails, postOwnerDetails} ) {
-            // alert(createdPostDetails.caption); //debugging purposes only
-            // alert(postOwnerDetails.username);
-
-            var postboxDiv = document.createElement('div');
-            postboxDiv.setAttribute('class','postbox owned');
-            postboxDiv.setAttribute('id',createdPostDetails._id);
-
-                var voteColumnDiv = document.createElement('div');
-                voteColumnDiv.setAttribute('class','vote-column');
-
-                    var fishDiv = document.createElement('div');
-                    fishDiv.setAttribute('class','fish');
-                    voteColumnDiv.append(fishDiv);
-
-                    var upvoteCountDiv = document.createElement('div');
-                    upvoteCountDiv.setAttribute('class','upvote-count');
-                    upvoteCountDiv.append(createdPostDetails.likes);
-                    voteColumnDiv.append(upvoteCountDiv);
-
-                    var fishboneDiv = document.createElement('div');
-                    fishboneDiv.setAttribute('class','fishbone');
-
-                voteColumnDiv.append(fishboneDiv);
-
-            postboxDiv.append(voteColumnDiv);
-
-                var photoColumnDiv = document.createElement('div');
-                photoColumnDiv.setAttribute('class','photo-column');
-
-                    var imgLinkA = document.createElement('a');
-                    imgLinkA.setAttribute('href','/post/'+createdPostDetails._id);
-                    
-                        var postImageImg = document.createElement('img');
-                        postImageImg.setAttribute('class','post-image');
-                        postImageImg.setAttribute('src',createdPostDetails.imgurl);
-
-                    imgLinkA.append(postImageImg);
-
-                photoColumnDiv.append(imgLinkA);
-
-            postboxDiv.append(photoColumnDiv);
-
-                var infoColumnDiv = document.createElement('div');
-                infoColumnDiv.setAttribute('class','info-column');
-
-                    var infoHeaderDiv = document.createElement('div');
-                    infoHeaderDiv.setAttribute('class','info-header'); 
-
-                        var posterLinkA = document.createElement('a');
-                        posterLinkA.setAttribute('class','poster-link'); 
-                        posterLinkA.setAttribute('href','/user/'+postOwnerDetails.username);
-
-                            var postProfilePicImg = document.createElement('img');
-                            postProfilePicImg.setAttribute('class','post-profilepic'); 
-                            postProfilePicImg.setAttribute('src',postOwnerDetails.profileimg); 
-
-                        posterLinkA.append(postProfilePicImg);
-        
-                    infoHeaderDiv.append(posterLinkA);
-
-                        var posterInfoDiv = document.createElement('div');
-                        posterInfoDiv.setAttribute('class','poster-info');
-
-                            posterLinkA = document.createElement('a');
-                            posterLinkA.setAttribute('class','poster-link');
-                            posterLinkA.setAttribute('href','/user/'+postOwnerDetails.username);
-
-                                var postOwnerDiv = document.createElement('div');
-                                postOwnerDiv.setAttribute('class','post-owner');
-                                postOwnerDiv.append(postOwnerDetails.username);
-                                
-                            posterLinkA.append(postOwnerDiv);
-
-                        posterInfoDiv.append(posterLinkA);
-
-                            var postLocationDiv = document.createElement('div');
-                            postLocationDiv.setAttribute('class','post-location');
-
-                                posterLinkA = document.createElement('a');
-                                posterLinkA.setAttribute('class','poster-link');
-                                posterLinkA.setAttribute('href','/user/'+postOwnerDetails.username);
-                            
-                            postLocationDiv.append(posterLinkA);
-
-                                locationLinkA = document.createElement('a');
-                                locationLinkA.setAttribute('href','#location');
-                                locationLinkA.append(createdPostDetails.location);
-
-                            postLocationDiv.append(locationLinkA);
-
-                        posterInfoDiv.append(postLocationDiv);
-
-                    infoHeaderDiv.append(posterInfoDiv);
-                
-                infoColumnDiv.append(infoHeaderDiv);
-
-                    var infoBodyDiv = document.createElement('div');
-                    infoBodyDiv.setAttribute('class','info-body');
-
-                        var postTextSpan = document.createElement('span');
-                        postTextSpan.setAttribute('class','post-text');
-
-                            var captionP = document.createElement('p');
-                            captionP.append(createdPostDetails.caption);
-
-                        postTextSpan.append(captionP);
-                    infoBodyDiv.append(postTextSpan);
-
-                infoColumnDiv.append(infoBodyDiv);
-
-                    var infoFooterDiv = document.createElement('div');
-                    infoFooterDiv.setAttribute('class','info-footer');
-
-                        var postHR = document.createElement('hr');
-                        postHR.setAttribute('class','post-hr');
-
-                    infoFooterDiv.append(postHR);
-
-                        var footerContentSpan = document.createElement('span');
-                        footerContentSpan.setAttribute('class','footer-content');
-
-                            footer1Span = document.createElement('span');
-                            footer1Span.setAttribute('class','footer-1');
-
-                                var saveA = document.createElement('a');
-                                saveA.setAttribute('href','/post/'+createdPostDetails._id);
-                                saveA.append('comments');
-
-                            footer1Span.append(saveA);
-                        footerContentSpan.append(footer1Span);
-                        footerContentSpan.append(' | ');
-
-                            var footer2Span = document.createElement('span');
-                            footer2Span.setAttribute('class','footer-2');
-
-                                var reportA = document.createElement('a');
-                                reportA.setAttribute('href','/edit/'+createdPostDetails._id);
-                                reportA.append('edit');
-
-                            footer2Span.append(reportA);
-                                         
-                        footerContentSpan.append(footer2Span);
-                        footerContentSpan.append(' | ');
-                        
-                            var footer3Span = document.createElement('span');
-                            footer3Span.setAttribute('class','footer-3');
-
-                                var optionsA = document.createElement('a');
-                                optionsA.setAttribute('href','#delete'+createdPostDetails._id);
-                                optionsA.append('delete');
-                            footer3Span.append(optionsA);
-                        footerContentSpan.append(footer3Span);
-                    infoFooterDiv.append(footerContentSpan);
-                infoColumnDiv.append(infoFooterDiv);
 
 
-            postboxDiv.append(infoColumnDiv);
-            $('.postlist').prepend(postboxDiv);
-
-            $('.postingbox').removeClass('postingbox-focused');
-            $('.postingbox-text').removeClass('postingbox-text-focused');
-            $('.upload-button').css('display','none');
-            $('.submit-button').css('display','none');
-        });
-
-    });
-//////////////////////////////////////////
 
 //CREATING COMMENTS
     $('.comment-submit-button').on('click',function() {
@@ -582,20 +533,5 @@ $(document).ready(function() {
         alert('good bye!');
         window.location.replace("/");
     });
-
-
-    //rotating image
-    function rotateImage() {
-        var backgroundImageArr = document.getElementsByClassName("background-image");
-        var randNumb = Math.floor(Math.random() * backgroundImageArr.length);
-        if(backgroundImageArr[randNumb].classList.contains("rotating")) {
-            backgroundImageArr[randNumb].classList.remove("rotating");
-        } else {
-            backgroundImageArr[randNumb].classList.add("rotating");
-        }
-    }
-
-    setInterval(rotateImage,5000);
-    //////////
 
 });

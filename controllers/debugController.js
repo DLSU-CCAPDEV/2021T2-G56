@@ -18,13 +18,9 @@ const debugController = {
 
     getTestPage: function(req, res) {
 
-        var logincredentials = {
-            username: req.session.username,
-            userid: req.session.userid,
-            email: req.session.email
-        }
+        var session = req.session;
 
-        res.render( 'test', logincredentials  );
+        res.render( 'test', session );
     },
 
     getAll: function(req, res) {
