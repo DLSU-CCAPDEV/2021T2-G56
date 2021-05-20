@@ -24,7 +24,7 @@ var UserSchema = new mongoose.Schema({
     },
     profileimg: {
         type: String,
-        required: false
+        required: true
     },
     upvotecount: {
         type: Number,

@@ -19,6 +19,7 @@ const signupController = {
                             req.session.userid = result.userid;
                             req.session.username = result.username;
                             req.session.email = result.email;
+                            req.session.profileimg = result.profileimg;
 
                             res.send( result );
 
@@ -67,7 +68,8 @@ const signupController = {
                 username: req.body.username,
                 email: req.body.email,
                 password: hash,
-                datecreated: Date.now()
+                datecreated: Date.now(),
+                profileimg: '1Kz2WwLDLgigjQXk2AzcrRV0Ohm6VuWO9',
             }
             db.insertOne(User, entry, function(flag){
                 req.session.logged = true;

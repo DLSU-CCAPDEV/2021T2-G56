@@ -16,7 +16,8 @@ const createController = {
                 postlocation: 'Agno, Taft Ave.',
                 imgurl: req.body.imgurl,
                 datecreated: Date.now(),
-                upvotecount: 0
+                upvotecount: 0,
+                profileimg: req.session.profileimg
             }
 
             db.insertOne(Post, entry, function(flag){
