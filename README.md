@@ -11,6 +11,4 @@ Welcome to group 56's repository. Our project is to create an Instagram-esque we
 - works in phones
 
 # things to do
-- add password hashing
-- add sessions
-- add delete account button
+- none! mission accomplished
