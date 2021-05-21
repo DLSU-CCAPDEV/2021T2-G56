@@ -96,8 +96,6 @@ var fileStorageEngine = multer.diskStorage({
 
 const upload = multer ({ storage: fileStorageEngine });
 
-
-
 const Post = require('./models/PostModel.js');
 
 app.post('/single', upload.single('image'), function(req, res) {

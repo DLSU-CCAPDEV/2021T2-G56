@@ -12,6 +12,7 @@ app.get(`/`, controller.getIndex);
 app.post(`/checkExistence`, signupController.postCheckExistence);
 app.post(`/createUser`, signupController.postCreateUser);
 app.get('/post/:postid', controller.getPost);
+app.get('/user/:username', controller.getUser);
 
 app.post(`/createPost`, postController.createPost);
 app.get('/edit/post/:postid', postController.editPostPage);

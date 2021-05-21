@@ -24,6 +24,19 @@ const controller = {
         }
     },
 
+    getUser: function(req, res) {
+        if(req.session.logged) {
+            db.findOne(User, { username: req.params.username }, {}, function(user) {
+                db.findMany(Post, { ownerusername: req.params.username }, {}, {}, function(post) {
+                    var sess = req.session;
+                    res.render('user', {user, post, sess} );
+                });
+            });
+        } else {
+            res.render('index');
+        }
+    },
+
     getPost: function(req, res) {
         if(req.session.logged) {
             db.findOne(Post, { postid: req.params.postid }, {}, function(post) {
