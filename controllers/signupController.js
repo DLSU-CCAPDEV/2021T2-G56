@@ -73,6 +73,10 @@ const signupController = {
             }
             db.insertOne(User, entry, function(flag){
                 req.session.logged = true;
+                req.session.userid = entry.userid;
+                req.session.username = entry.username;
+                req.session.email = entry.email;
+                req.session.profileimg = entry.profileimg;
                 res.send(entry);
             });
         });
