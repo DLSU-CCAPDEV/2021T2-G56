@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> post </title>
+    <%- include('./partials/header.ejs') %>
+</head>
+<body>
+
+    <%- include('./partials/navbar.ejs') %>
+
+
+
+    <div class='wrapper'>
+
+        <div class='postwall'>
+
+            <div id='<%= post.postid %>'class='selected-postbox <% if(post.ownerusername == sess.username) { %>selected-owned<% } %>'>
+
+                <div class='selected-vote-column'>
+                <% if(votepost != null) { %>
+                    <% if(votepost.votetype=='upvote') { %>
+                        <div class='fish upvoted'></div>
+                        <div class='upvote-count'> <%= post.upvotecount %> </div>
+                        <div class='fishbone'></div>
+                    <% } else if (votepost.votetype=='downvote') { %>
+                        <div class='fish'></div>
+                        <div class='upvote-count'> <%= post.upvotecount %> </div>
+                        <div class='fishbone downvoted'></div>
+                    <% } else { %>
+                        <div class='fish'></div>
+                        <div class='upvote-count'> <%= post.upvotecount %> </div>
+                        <div class='fishbone downvoted'></div>
+                    <% } %>
+                <% } else { %>
+                    <div class='fish'></div>
+                    <div class='upvote-count'> <%= post.upvotecount %> </div>
+                    <div class='fishbone'></div>
+                <% } %>
+                </div>
+
+                <div class='selected-photo-column'>
+                    <img class ='selected-post-image' src='https://drive.google.com/uc?id=<%= post.imgurl %>&export=download'>
+                </div>
+
+                <div class='selected-info-column'>
+                    <div class='selected-info-header'>
+                        <a class='poster-link' href='/user/<%= post.ownerusername %>'>
+
+
+                                <img class='post-profilepic' src='https://drive.google.com/uc?id=<%= post.profileimg %>&export=download'>
+
+
+                                <div class='poster-info'>
+                                    <div class='post-owner'>
+                                        <%= post.ownerusername %>
+                                    </div>
+                                    <div class='post-location'>
+                                        <a class='location-link' href='#location'>
+                                            <%= post.postlocation %>
+                                        </a>
+                                    </div>
+                                </div>
+                        
+                                
+                        </a>
+                    </div>
+
+
+                    <div class='selected-info-body'>
+                        <span class='selected-post-text'>
+                            <p>
+                                <%= post.postcaption %>
+                            </p>
+                            
+                        </span>
+                        
+                    </div>
+                    <div class='selected-info-footer'>
+                        <hr class='selected-post-hr'>
+                        <span class='footer-content'>
+
+                            <% if(post.ownerusername == sess.username) { %>
+                                <span class='selected-footer-1'><a href='/edit/post/<%= post.postid %>'>edit</a></span>&nbsp;|&nbsp;
+                                <span class='selected-footer-2'><a href='#delete'>delete</a></span>
+                            <% } else { %>
+                                <span class='selected-footer-1'><a href='#report'>report</a></span>
+                            <% } %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class='commentingbox'>
+                <textarea name='comment' class="commentingbox-text" placeholder='wanna say something?'></textarea>
+                <input type='submit' class='comment-submit-button' value='comment'>
+            </div>
+
+            <% for(var i=0; i < comment.length; i++) { %>
+                <div class='commentbox' id='<%= comment[i].commentid %>'>
+                    <div class='comment-vote-column'>
+                    <% var flag = false; %>
+                    <% for(var x=0; x < votecomment.length; x++) { %>
+                        <% if(votecomment[x].commentparent == comment[i].commentid) { %>
+                            <% if(votecomment[x].votetype == 'upvote') { %>
+                                <% flag = true; %>
+                                <div class='comment-fish upvoted'></div>
+                                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                                <div class='comment-fishbone'></div>
+                            <% } else if(votecomment[x].votetype == 'downvote') { %>
+                                <% flag = true; %>
+                                <div class='comment-fish'></div>
+                                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                                <div class='comment-fishbone downvoted'></div>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                    <% if(!flag) { %>
+                        <div class='comment-fish'></div>
+                        <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                        <div class='comment-fishbone'></div>
+                    <% } %>
+                    </div>
+                    
+
+                    <div class='comment-column'>
+                        <div class='comment-header'>
+                            <a class='poster-link' href='/user/<%= comment[i].ownerusername %>'>
+
+                                    <div class='comment-info'>
+                                        <div class='comment-owner'>
+                                            <%= comment[i].ownerusername %>
+                                        </div>
+                                    </div>
+                                
+                            </a>
+                        </div>
+
+
+                        <div class='comment-body'>
+                            <span class='comment-text'>
+                                <p>
+                                    <%= comment[i].commentcaption %>
+                                </p>
+                                
+                            </span>
+                            
+                        </div>
+                        <div class='comment-footer'>
+                            <% if(comment[i].ownerusername==sess.username) { %>
+                                <hr class='post-hr'>
+                            
+                            <span class='comment-footer-content'>
+                                <span class='comment-footer-2'><a href='/edit/comment/<%= comment[i].commentid %>'>edit</a></span>&nbsp;|&nbsp;
+                                <span class='comment-footer-3'><a href='#delete/<%= comment[i].commentid %>'>delete</a></span>
+                            </span>
+                            <% } %>
+                        </div>
+                    </div>
+
+                </div>
+            <% } %>
+
+
+        </div>
+    
+    
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

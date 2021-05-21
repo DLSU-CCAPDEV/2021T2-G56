@@ -1,35 +1,39 @@
 var mongoose = require('mongoose');
 
 
-var UserSchema = new mongoose.Schema({
-    userid: {
+var CommentSchema = new mongoose.Schema({
+    commentid: {
         type: Number,
         required: true
     },
-    username: {
+    ownerid: {
+        type: Number,
+        required: true
+    },
+    ownerusername: {
         type: String,
         required: true
     },
-    email: {
-        type: String,
+    postparent: {
+        type: Number,
         required: true
     },
-    password: {
+    commentcaption: {
         type: String,
-        required: true
+        required: false
     },
     datecreated: {
         type: Number,
         required: true
     },
-    profileimg: {
-        type: String,
+    dateedited: {
+        type: Number,
         required: false
     },
     upvotecount: {
         type: Number,
-        required: false
+        required: true
     }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Comment', CommentSchema);

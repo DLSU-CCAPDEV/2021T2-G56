@@ -1,6 +1,10 @@
 
 const mongoose = require('mongoose');
 const UserModel = require('./UserModel.js');
+const PostModel = require('./PostModel.js');
+const VotePostModel = require('./VotePostModel.js');
+const VoteCommentModel = require('./VoteCommentModel.js');
+const CommentModel = require('./CommentModel.js');
 
 
 const url = 'mongodb+srv://admin:adminpassword@cluster0.h1c1r.mongodb.net/catsallian-database?retryWrites=true&w=majority';
@@ -21,7 +25,7 @@ const database = {
 
     insertOne: function(model, doc, callback) {
         model.create(doc, function(error, result) {
-            if(error) return callback(false);
+            if(error) return callback(error);
             console.log('Added ' + result);
             return callback(true);
         });

@@ -1,0 +1,89 @@
+:root {
+    --bio: rgb(236, 229, 223);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--body);
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 2;
+}
+
+.profile-bio {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 12px;
+    width: 80%;
+    background: var(--bio);
+}
+
+.profile-bio-text {
+    font-size: 20px;
+}
+
+.profile-img {
+    height: 100px;
+    border-radius: 100px;
+}
+
+.profile-username {
+    margin-left: 15px;
+    font-weight: 700;
+}
+
+.profile-hr {   
+    position: absolute;
+    margin-top: 60px;
+    width: 900px;
+    border-width: 5px;
+    z-index: 1;
+    border-color: var(--font);
+}
+
+.profile-grid {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.profile-grid-img {
+    border-radius: 12px;
+    width: 250px;
+    height: 250px;
+}
+
+
+@media screen and (max-width: 810px) {
+    .profile-grid-img {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .profile-grid-col {
+        display: flex;
+    }
+
+    .profile-grid-img {
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 200px;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 660px) {
+
+    .profile-grid-img {
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 120px;
+        width: 120px;
+    }
+}
