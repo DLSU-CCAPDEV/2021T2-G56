@@ -12,7 +12,6 @@
     <%- include('./partials/navbar.ejs')%>
 
     <div class='wrapper'>
-
         <div class='postwall'>
             <div class='postingbox'>
                 <textarea name='caption' class="postingbox-text" placeholder='got some cat pics?'></textarea>
@@ -24,7 +23,6 @@
                 <% for(i=0; i < post.length; i++ ) { %>
                     <%- include('./partials/postbox', {i, post, sess, votepost} ) %>
                 <% } %>
-
             </div>
             
         </div>

@@ -506,7 +506,7 @@ $(document).ready(function() {
                         password: password,
                         bio: bio,
                         profileimg: imgurl,
-                    };
+                    }
 
                     $.post('/updateSettings', entry, function (result) {
                         alert('Settings changed!');
