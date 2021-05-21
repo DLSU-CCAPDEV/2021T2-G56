@@ -55,13 +55,13 @@ app.use(express.static(`public`));
 
 db.connect();
 
-async function uploadFile(filename) {
+async function uploadFile(filename, folderpath) {
   try {
     const response = await drive.files.create({
       requestBody: {
         name: Date.now() + ' -- ' + filename,
         mimeType: 'image/png',
-        parents: [uploadsFolder]
+        parents: [folderpath]
       },
       media: {
 		mimeType: 'image/png',
@@ -99,7 +99,13 @@ const upload = multer ({ storage: fileStorageEngine });
 const Post = require('./models/PostModel.js');
 
 app.post('/single', upload.single('image'), function(req, res) {
-    uploadFile(req.file.originalname).then(imgurl => {
+    uploadFile(req.file.originalname, uploadsFolder ).then(imgurl => {
+        res.send(imgurl);
+    });
+});
+
+app.post('/singleprofile', upload.single('image'), function(req, res) {
+    uploadFile(req.file.originalname, profileimgFolder ).then(imgurl => {
         res.send(imgurl);
     });
 });

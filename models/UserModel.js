@@ -29,6 +29,10 @@ var UserSchema = new mongoose.Schema({
     upvotecount: {
         type: Number,
         required: false
+    },
+    bio: {
+        type: String,
+        required: false
     }
 });
 

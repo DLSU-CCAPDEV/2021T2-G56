@@ -480,34 +480,66 @@ $(document).ready(function() {
     });
 //////////////////////////////////////////////
 
-    //SETTINGS CANCELED
-    $(document).on('click','.update-cancel-button',function() {
-        window.location.replace("/home");
-    });
 
-    //SETTINGS SUBMITTED
+//SETTINGS SUBMITTED
     $(document).on('click','.update-account-button',function() {
-        var myID = $('.my-settings').attr('id');
-        var newusername = $('#username').val();
-        var newemail = $('#email').val();
-        var newpassword = $('#password').val();
-        var newbio = $('#bio').val();
-        var newprofileimgUncleaned = $('#profilepic').val();
-        var newprofileimg = newprofileimgUncleaned.replace(/^C:\\fakepath\\/, "/images/profiledatabase/");
+        var username = $('#username').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var bio = $('#bio').val();
+        var profileimg = $('#profilepic')[0].files[0];
 
-        var entry = {
-            newusername: newusername,
-            newemail: newemail,
-            newpassword: newpassword,
-            newbio: newbio,
-            newprofileimg: newprofileimg,
-            myID: myID
-        };
+        var formdata = new FormData();
+        formdata.append('image',profileimg);
 
-        $.post('/changeSettings', entry);
-        alert('settings changed!');
-        window.location.replace("/settings");
+        if( !jQuery.isEmptyObject( profileimg ) ) {
+            $.ajax({
+                url: '/singleprofile',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                'success': function(imgurl){
+                    var entry = {
+                        username: username,
+                        email: email,
+                        password: password,
+                        bio: bio,
+                        profileimg: imgurl,
+                    };
+
+                    $.post('/updateSettings', entry, function (result) {
+                        alert('Settings changed!');
+                        console.log(result);
+                    });
+                }
+            });
+        } else {
+            var entry = {
+                username: username,
+                email: email,
+                password: password,
+                bio: bio
+            };
+            $.post('/updateSettings', entry, function (result) {
+                alert('Settings changed!');
+                console.log(result);
+            });
+        }
+
+        // $.post('/changeSettings', entry);
+        // alert('settings changed!');
+        // window.location.replace("/settings");
     });
+/////////////////////////////////
+
+
+//SETTINGS CANCELED
+    $(document).on('click','.update-cancel-button',function() {
+        window.location.replace("/page/home");
+    });
+/////////////////////////
+
 
     
 
