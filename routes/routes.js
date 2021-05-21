@@ -24,6 +24,8 @@ app.post(`/deletePost`, postController.deletePost);
 app.post(`/votePost`, postController.votePost);
 
 app.post(`/updateSettings`, userController.updateSettings);
+app.post(`/logout`, userController.logOut);
+app.post(`/deleteAccount`, userController.deleteAccount);
 
 app.post(`/createComment`, commentController.createComment);
 app.get(`/edit/comment/:commentid`, commentController.editCommentPage);

@@ -2,6 +2,7 @@
 $(document).ready(function() {
 
 
+
 //POSTBOX ENLARGES WHEN FOCUSED ON
     $('.postingbox-text').on('click',function() {
         $(this).addClass('postingbox-text-focused');
@@ -511,6 +512,7 @@ $(document).ready(function() {
                     $.post('/updateSettings', entry, function (result) {
                         alert('Settings changed!');
                         console.log(result);
+                        window.location.replace("/settings");
                     });
                 }
             });
@@ -524,15 +526,11 @@ $(document).ready(function() {
             $.post('/updateSettings', entry, function (result) {
                 alert('Settings changed!');
                 console.log(result);
+                window.location.replace("/settings");
             });
         }
-
-        // $.post('/changeSettings', entry);
-        // alert('settings changed!');
-        // window.location.replace("/settings");
     });
 /////////////////////////////////
-
 
 //SETTINGS CANCELED
     $(document).on('click','.update-cancel-button',function() {
@@ -540,13 +538,24 @@ $(document).ready(function() {
     });
 /////////////////////////
 
-
-    
-
-    //LOGOUT
+// LOGOUT
     $(document).on('click','.logout-button',function() {
+        $.post('/logout');
         alert('good bye!');
         window.location.replace("/");
     });
+///////////////////////
+
+//SETTINGS CANCELED
+    $(document).on('click','.update-delete-button',function() {
+        var deleteconfirmation = confirm('deletion is permanent! know what you\'re getting into!');
+        if(deleteconfirmation) {
+            alert('good bye, old friend :(');
+            $.post('/deleteAccount', function() {
+                window.location.replace("/");
+            });
+        }
+    });
+/////////////////////////
 
 });

@@ -77,6 +77,30 @@ const userController = {
         res.send(req.session);
     },
 
+    logOut: function(req, res) {
+        req.session.destroy(function(err) {
+            if(err) throw err;
+        });
+    },
+
+    deleteAccount: function(req, res) {
+        let sess = req.session;
+        db.deleteOne(User, { userid: req.session.userid }, function(result) {
+            db.deleteMany(Comment, { ownerid: req.session.userid }, function(flag) {
+                db.deleteMany(Post, { ownerid: req.session.userid }, function(flag) {
+                    db.deleteMany(VoteComment, { voteowner: req.session.username }, function(flag) {
+                        db.deleteMany(VotePost, { voteowner: req.session.username }, function(flag) {
+                            res.send(flag);
+                            req.session.destroy(function(err) {
+                                if(err) throw err;
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    }
+
 }
 
 module.exports = userController;
