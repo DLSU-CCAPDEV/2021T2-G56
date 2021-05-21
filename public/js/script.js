@@ -253,14 +253,15 @@ $(document).ready(function() {
 
         $.post('/editPostConfirm', {postid: postid, postcaption: postcaption} );
         alert('caption has been edited!');
-        window.location.replace("/");
+        window.location.replace("/post/"+postid);
     });
 //////////////////////////////
 
 
 //EDIT POST CANCELED
     $(document).on('click','.editingbox-cancel-button',function() {
-        window.location.replace("/");
+        var postid = $('.selected-postbox').attr('id');
+        window.location.replace("/post/"+postid);
     });
 ///////////////////////////////
 
@@ -283,6 +284,20 @@ $(document).ready(function() {
     });
 ///////////////////////////////
 
+
+//DELETE POST ON A FOCUSED POST PAGE 
+    $(document).on('click','.selected-footer-2',function() {
+        var selectedFooter2 = $(this).text();
+        if(selectedFooter2=='delete') {
+            var postid = $(this).closest('.selected-postbox').attr('id');
+    
+            $.post('/deletePost', {postid: postid} );
+            alert('this post has been deleted!');
+            window.location.replace("/");
+        } else {
+            //additional features one day
+        }
+    });
 
 // CREATING COMMENTS
     function createComment(commentdetails) {
@@ -434,28 +449,13 @@ $(document).ready(function() {
 //////////////////////////////////////////////
 
 
-    //DELETE POST AT SELECTED PAGE
-    $(document).on('click','.selected-footer-2',function() {
-        var selectedFooter2 = $(this).text();
-        if(selectedFooter2=='delete') {
-            var postID = $(this).closest('.selected-postbox').attr('id');
-    
-            $.post('/deletePost', {postID: postID});
-            alert('this post has been deleted!');
-            window.location.replace("/home");
-            
-        } else {
-            //additional features one day
-        }
-    });
-
     //DELETE COMMENTS
     $(document).on('click','.comment-footer-3',function() {
-        var commentID = $(this).closest('.commentbox').attr('id');
-        $(this).closest('.commentbox').remove();
+        var commentid = $(this).closest('.commentbox').attr('id');
 
-        $.post('/deleteComment', {commentID: commentID});
+        $.post('/deleteComment', {commentid: commentid} );
         alert('this comment has been deleted!');
+        $(this).closest('.commentbox').remove();
     });
 
     // EDIT

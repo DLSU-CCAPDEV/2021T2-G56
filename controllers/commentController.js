@@ -27,6 +27,14 @@ const commentController = {
         });
     },
 
+    deleteComment: function(req, res) {
+        db.deleteOne(Comment, { commentid: req.body.commentid }, function(result) {
+            db.deleteMany(VoteComment, { commentparent: req.body.commentid }, function(flag) {
+                res.send(flag);
+            });
+        });
+    },
+
     voteComment: function(req, res) {
 
         var query = {

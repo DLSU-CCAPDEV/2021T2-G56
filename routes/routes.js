@@ -16,10 +16,11 @@ app.get('/post/:postid', controller.getPost);
 app.post(`/createPost`, postController.createPost);
 app.get('/edit/post/:postid', postController.editPostPage);
 app.post('/editPostConfirm', postController.editPostConfirm);
-app.post(`/votePost`, postController.votePost);
 app.post(`/deletePost`, postController.deletePost);
+app.post(`/votePost`, postController.votePost);
 
 app.post(`/createComment`, commentController.createComment);
+app.post(`/deleteComment`, commentController.deleteComment);
 app.post(`/voteComment`, commentController.voteComment);
 
 app.get(`/debug/user/:username`, debugController.getTestUser);
