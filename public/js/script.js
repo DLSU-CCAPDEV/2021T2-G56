@@ -1,7 +1,4 @@
-// https://drive.google.com/uc?id=[ID HERE]&export=download
 $(document).ready(function() {
-
-
 
 //POSTBOX ENLARGES WHEN FOCUSED ON
     $('.postingbox-text').on('click',function() {
@@ -534,7 +531,8 @@ $(document).ready(function() {
 
 //SETTINGS CANCELED
     $(document).on('click','.update-cancel-button',function() {
-        window.location.replace("/page/home");
+        var username = $('#username').attr('placeholder');
+        window.location.replace("/user/"+username);
     });
 /////////////////////////
 
