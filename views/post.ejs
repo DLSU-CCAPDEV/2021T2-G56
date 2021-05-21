@@ -98,8 +98,69 @@
                 <input type='submit' class='comment-submit-button' value='comment'>
             </div>
 
-            <% for(var i=0; i<comment.length; i++) { %>
-                <%- include('./partials/commentbox.ejs', {comment, i, sess, votecomment}); %>
+            <% for(var i=0; i < comment.length; i++) { %>
+                <div class='commentbox' id='<%= comment[i].commentid %>'>
+                    <div class='comment-vote-column'>
+                    <% var flag = false; %>
+                    <% for(var x=0; x < votecomment.length; x++) { %>
+                        <% if(votecomment[x].commentparent == comment[i].commentid) { %>
+                            <% if(votecomment[x].votetype == 'upvote') { %>
+                                <% flag = true; %>
+                                <div class='comment-fish upvoted'></div>
+                                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                                <div class='comment-fishbone'></div>
+                            <% } else if(votecomment[x].votetype == 'downvote') { %>
+                                <% flag = true; %>
+                                <div class='comment-fish'></div>
+                                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                                <div class='comment-fishbone downvoted'></div>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                    <% if(!flag) { %>
+                        <div class='comment-fish'></div>
+                        <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                        <div class='comment-fishbone'></div>
+                    <% } %>
+                    </div>
+                    
+
+                    <div class='comment-column'>
+                        <div class='comment-header'>
+                            <a class='poster-link' href='/user/<%= comment[i].ownerusername %>'>
+
+                                    <div class='comment-info'>
+                                        <div class='comment-owner'>
+                                            <%= comment[i].ownerusername %>
+                                        </div>
+                                    </div>
+                                
+                            </a>
+                        </div>
+
+
+                        <div class='comment-body'>
+                            <span class='comment-text'>
+                                <p>
+                                    <%= comment[i].commentcaption %>
+                                </p>
+                                
+                            </span>
+                            
+                        </div>
+                        <div class='comment-footer'>
+                            <% if(comment[i].ownerusername==sess.username) { %>
+                                <hr class='post-hr'>
+                            
+                            <span class='comment-footer-content'>
+                                <span class='comment-footer-2'><a href='/edit/comment/<%= comment[i].commentid %>'>edit</a></span>&nbsp;|&nbsp;
+                                <span class='comment-footer-3'><a href='#delete/<%= comment[i].commentid %>'>delete</a></span>
+                            </span>
+                            <% } %>
+                        </div>
+                    </div>
+
+                </div>
             <% } %>
 
 

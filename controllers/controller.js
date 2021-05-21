@@ -29,7 +29,7 @@ const controller = {
             db.findOne(Post, { postid: req.params.postid }, {}, function(post) {
                 db.findMany(Comment, { postparent: req.params.postid }, {}, {}, function(comment) {
                     db.findOne(VotePost, { voteowner: req.session.username, postparent: req.params.postid }, {}, function(votepost) {
-                        db.findMany(VoteComment, {}, {}, {}, function(votecomment) {
+                        db.findMany(VoteComment, { voteowner: req.session.username }, {}, {}, function(votecomment) {
                             var sess = req.session;
                             res.render('post', {post, comment, votepost, votecomment, sess} );
                         });

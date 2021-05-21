@@ -284,138 +284,49 @@ $(document).ready(function() {
 ///////////////////////////////
 
 
-
-
-
-//FOR UPVOTING AND DOWNVOTING COMMENTS
-    $(document).on('click','.comment-fish',function() {
-        var commentID = $(this).closest('.commentbox').attr('id');
-
-        var type = 'none';
-        var counterString = $(this).siblings('.upvote-count').text();
-        var counterInt = parseInt(counterString);
-
-        if($(this).siblings('.comment-fishbone').hasClass('downvoted')) {
-            $(this).siblings('.comment-fishbone').removeClass('downvoted');
-            $(this).addClass('upvoted');
-            $(this).siblings('.upvote-count').text(counterInt+2);
-            type = 'upvote';
-        } else if($(this).hasClass('upvoted')) {
-            $(this).removeClass('upvoted');
-            $(this).siblings('.upvote-count').text(counterInt-1);
-            type = 'none';
-        } else {
-            $(this).addClass('upvoted');
-            $(this).siblings('.upvote-count').text(counterInt+1);
-            type = 'upvote';
-        }
-
-        counterString = $(this).siblings('.upvote-count').text();
-        var upvoteOwner = $('.profile-link').attr('id');
-        
-        // alert(postID); //debugging purposes
-        $.post('/commentCountUpdate', {commentID: commentID, counterString: counterString, upvoteOwner: upvoteOwner, type: type});
-    });
-    
-
-    $(document).on('click','.comment-fishbone',function() {
-        var commentID = $(this).closest('.commentbox').attr('id');
-
-        var type = 'none';
-        var counterString = $(this).siblings('.upvote-count').text();
-        var counterInt = parseInt(counterString);
-
-        if($(this).siblings('.comment-fish').hasClass('upvoted')) {
-            $(this).siblings('.comment-fish').removeClass('upvoted');
-            $(this).addClass('downvoted');
-            $(this).siblings('.upvote-count').text(counterInt-2);
-            type = 'downvote';
-        } else if($(this).hasClass('downvoted')) {
-            $(this).removeClass('downvoted');
-            $(this).siblings('.upvote-count').text(counterInt+1);
-            type = 'none';
-        } else {
-            $(this).addClass('downvoted');
-            $(this).siblings('.upvote-count').text(counterInt-1);
-            type = 'downvote';
-        }
-
-        counterString = $(this).siblings('.upvote-count').text();
-        var upvoteOwner = $('.profile-link').attr('id');
-        
-        // alert(postID); //debugging purposes
-        $.post('/commentCountUpdate', {commentID: commentID, counterString: counterString, upvoteOwner: upvoteOwner, type: type});
-    });
-//////////////////////////////////////////////
-
-
-
-
-//CREATING COMMENTS
-    $('.comment-submit-button').on('click',function() {
-        var content = $('.commentingbox-text').val();
-        $('.commentingbox-text').val('');
-
-        var postparent = $('.selected-postbox').attr('id');
-
-        // alert(comment+' and '+postParentID);
-
-        $.post('/createComment', {content: content, postparent: postparent}, function ( {createdCommentDetails, commentOwnerDetails} ) {
-            //alert(createdCommentDetails.content+' '+commentOwnerDetails.username); //debugging purposes only
-
-            var commentboxDiv = document.createElement('div');
+// CREATING COMMENTS
+    function createComment(commentdetails) {
+        var commentboxDiv = document.createElement('div');
             commentboxDiv.setAttribute('class','commentbox');
-            commentboxDiv.setAttribute('id',createdCommentDetails._id);
-
+            commentboxDiv.setAttribute('id',commentdetails.commentid);
                 var commentVoteColumnDiv = document.createElement('div');
                 commentVoteColumnDiv.setAttribute('class','comment-vote-column');
-
                     var fishDiv = document.createElement('div');
                     fishDiv.setAttribute('class','comment-fish');
-                
                 commentVoteColumnDiv.append(fishDiv);
-
                     var upvoteCountDiv = document.createElement('div');
                     upvoteCountDiv.setAttribute('class','upvote-count');
-                    upvoteCountDiv.append(createdCommentDetails.likes);
-                
+                    upvoteCountDiv.append(commentdetails.upvotecount);
                 commentVoteColumnDiv.append(upvoteCountDiv);
-
                     var fishboneDiv = document.createElement('div');
                     fishboneDiv.setAttribute('class','comment-fishbone');
-                
                 commentVoteColumnDiv.append(fishboneDiv);
-
             commentboxDiv.append(commentVoteColumnDiv);
-
                 var commentColumnDiv = document.createElement('div');
                 commentColumnDiv.setAttribute('class','comment-column');
                     var commentHeaderDiv = document.createElement('div');
                     commentHeaderDiv.setAttribute('class','comment-header');
                         var posterLinkA = document.createElement('a');
                         posterLinkA.setAttribute('class','poster-link');
-                        posterLinkA.setAttribute('href','/user/'+createdCommentDetails.owner);
-                            var commentInfoDiv = document.createElement('div'); //here
+                        posterLinkA.setAttribute('href','/user/'+commentdetails.ownerusername);
+                            var commentInfoDiv = document.createElement('div');
                             commentInfoDiv.setAttribute('class','comment-info');
                                 var commentOwnerDiv = document.createElement('div');
                                 commentOwnerDiv.setAttribute('class','comment-owner');
-                                commentOwnerDiv.append(createdCommentDetails.owner);
+                                commentOwnerDiv.append(commentdetails.ownerusername);
                             commentInfoDiv.append(commentOwnerDiv);
-                        posterLinkA.append(commentInfoDiv); //here
+                        posterLinkA.append(commentInfoDiv);
                     commentHeaderDiv.append(posterLinkA);
                 commentColumnDiv.append(commentHeaderDiv);
-
                     var commentBodyDiv = document.createElement('div');
                     commentBodyDiv.setAttribute('class','comment-body');
                         var commentTextSpan = document.createElement('span');
                         commentTextSpan.setAttribute('class','comment-text');
                             var pElement = document.createElement('p');
-                            pElement.append(createdCommentDetails.content);
+                            pElement.append(commentdetails.commentcaption);
                         commentTextSpan.append(pElement);
                     commentBodyDiv.append(commentTextSpan);
                 commentColumnDiv.append(commentBodyDiv);
-
-
                     var commentFooterDiv = document.createElement('div');
                     commentFooterDiv.setAttribute('class','comment-footer');
                         var postHR = document.createElement('hr');
@@ -423,37 +334,105 @@ $(document).ready(function() {
                     commentFooterDiv.append(postHR);
                         var commentFooterContentSpan = document.createElement('span');
                         commentFooterContentSpan.setAttribute('class','comment-footer-content');
-
                             var commentFooter2Span = document.createElement('span');
                             commentFooter2Span.setAttribute('class','comment-footer-2');
                                 var saveA = document.createElement('a');
-                                saveA.setAttribute('href','/edit/comment/'+createdCommentDetails._id);
+                                saveA.setAttribute('href','/edit/comment/'+commentdetails.commentid);
                                 saveA.append('edit ');
                             commentFooter2Span.append(saveA);
                             commentFooter2Span.append(' | ');
                         commentFooterContentSpan.append(commentFooter2Span);
-
                             var commentFooter3Span = document.createElement('span');
                             commentFooter3Span.setAttribute('class','comment-footer-3');
                                 var reportA = document.createElement('a');
-                                reportA.setAttribute('href','#delete/'+createdCommentDetails._id);
+                                reportA.setAttribute('href','#delete/'+commentdetails.commentid);
                                 reportA.append(' delete ');
                             commentFooter3Span.append(reportA);
                         commentFooterContentSpan.append(commentFooter3Span);
-
                     commentFooterDiv.append(commentFooterContentSpan)
                 commentColumnDiv.append(commentFooterDiv);
-
             commentboxDiv.append(commentColumnDiv);
-
-
             $('.postwall').append(commentboxDiv);
+    }
 
+    $('.comment-submit-button').on('click',function() {
+        var commentcaption = $('.commentingbox-text').val();
+        $('.commentingbox-text').val('');
+        var postparent = $('.selected-postbox').attr('id');
 
+        console.log('hi');
+
+        $.post('/createComment', {commentcaption: commentcaption, postparent: postparent}, function (result) {
+            createComment(result);
         });
+        
 
     });
 ////////////////////////////////////////
+
+
+
+//FOR UPVOTING COMMENTS
+    $(document).on('click','.comment-fish',function() {
+        var commentparent = $(this).closest('.commentbox').attr('id');
+
+        var votetype = 'none';
+        var upvotecountString = $(this).siblings('.upvote-count').text();
+        var upvotecountInt = parseInt(upvotecountString);
+
+        if($(this).siblings('.comment-fishbone').hasClass('downvoted')) {
+            $(this).siblings('.comment-fishbone').removeClass('downvoted');
+            $(this).addClass('upvoted');
+            $(this).siblings('.upvote-count').text(upvotecountInt+2);
+            votetype = 'upvote';
+        } else if($(this).hasClass('upvoted')) {
+            $(this).removeClass('upvoted');
+            $(this).siblings('.upvote-count').text(upvotecountInt-1);
+            votetype = 'none';
+        } else {
+            $(this).addClass('upvoted');
+            $(this).siblings('.upvote-count').text(upvotecountInt+1);
+            votetype = 'upvote';
+        }
+
+        upvotecountString = $(this).siblings('.upvote-count').text();
+        upvotecountInt = parseInt(upvotecountString);
+        
+        $.post('/voteComment', {commentparent: commentparent, upvotecount: upvotecountInt, votetype: votetype});
+    });
+////////////////////////////////////////
+
+
+//FOR DOWNVOTING COMMENTS
+    $(document).on('click','.comment-fishbone',function() {
+        var commentparent = $(this).closest('.commentbox').attr('id');
+
+        var votetype = 'none';
+        var upvotecountString = $(this).siblings('.upvote-count').text();
+        var upvotecountInt = parseInt(upvotecountString);
+
+        if($(this).siblings('.comment-fish').hasClass('upvoted')) {
+            $(this).siblings('.comment-fish').removeClass('upvoted');
+            $(this).addClass('downvoted');
+            $(this).siblings('.upvote-count').text(upvotecountInt-2);
+            votetype = 'downvote';
+        } else if($(this).hasClass('downvoted')) {
+            $(this).removeClass('downvoted');
+            $(this).siblings('.upvote-count').text(upvotecountInt+1);
+            votetype = 'none';
+        } else {
+            $(this).addClass('downvoted');
+            $(this).siblings('.upvote-count').text(upvotecountInt-1);
+            votetype = 'downvote';
+        }
+
+        upvotecountString = $(this).siblings('.upvote-count').text();
+        upvotecountInt = parseInt(upvotecountString);
+        
+        $.post('/voteComment', {commentparent: commentparent, upvotecount: upvotecountInt, votetype: votetype});
+    });
+//////////////////////////////////////////////
+
 
     //DELETE POST AT SELECTED PAGE
     $(document).on('click','.selected-footer-2',function() {

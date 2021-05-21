@@ -2,7 +2,8 @@ const express = require(`express`);
 const controller = require(`../controllers/controller.js`);
 const signupController = require(`../controllers/signupController.js`);
 const debugController = require(`../controllers/debugController.js`);
-const createController = require(`../controllers/createController.js`);
+const postController = require(`../controllers/postController.js`);
+const commentController = require(`../controllers/commentController.js`);
 
 const app = express();
 
@@ -12,11 +13,14 @@ app.post(`/checkExistence`, signupController.postCheckExistence);
 app.post(`/createUser`, signupController.postCreateUser);
 app.get('/post/:postid', controller.getPost);
 
-app.post(`/createPost`, createController.createPost);
-app.get('/edit/post/:postid', createController.editPostPage);
-app.post('/editPostConfirm', createController.editPostConfirm);
-app.post(`/votePost`, createController.votePost);
-app.post(`/deletePost`, createController.deletePost);
+app.post(`/createPost`, postController.createPost);
+app.get('/edit/post/:postid', postController.editPostPage);
+app.post('/editPostConfirm', postController.editPostConfirm);
+app.post(`/votePost`, postController.votePost);
+app.post(`/deletePost`, postController.deletePost);
+
+app.post(`/createComment`, commentController.createComment);
+app.post(`/voteComment`, commentController.voteComment);
 
 app.get(`/debug/user/:username`, debugController.getTestUser);
 app.get(`/debug/page`, debugController.getTestPage);

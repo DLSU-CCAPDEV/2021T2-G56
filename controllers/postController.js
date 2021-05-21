@@ -3,7 +3,7 @@ const User = require('../models/UserModel.js');
 const Post = require('../models/PostModel.js');
 const VotePost = require('../models/VotePostModel.js');
 
-const createController = {
+const postController = {
 
     createPost: function(req, res) {
         
@@ -114,4 +114,4 @@ const createController = {
     }
 }
 
-module.exports = createController;
+module.exports = postController;
