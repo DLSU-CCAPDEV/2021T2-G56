@@ -4,6 +4,7 @@ const signupController = require(`../controllers/signupController.js`);
 const debugController = require(`../controllers/debugController.js`);
 const postController = require(`../controllers/postController.js`);
 const commentController = require(`../controllers/commentController.js`);
+const userController = require(`../controllers/userController.js`);
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.get(`/`, controller.getIndex);
 app.post(`/checkExistence`, signupController.postCheckExistence);
 app.post(`/createUser`, signupController.postCreateUser);
 app.get('/post/:postid', controller.getPost);
+app.get('/user/:username', controller.getUser);
+app.get('/page/:pagetype', controller.getPage);
+app.get('/settings', controller.getSettings);
 
 app.post(`/createPost`, postController.createPost);
 app.get('/edit/post/:postid', postController.editPostPage);
@@ -19,7 +23,13 @@ app.post('/editPostConfirm', postController.editPostConfirm);
 app.post(`/deletePost`, postController.deletePost);
 app.post(`/votePost`, postController.votePost);
 
+app.post(`/updateSettings`, userController.updateSettings);
+app.post(`/logout`, userController.logOut);
+app.post(`/deleteAccount`, userController.deleteAccount);
+
 app.post(`/createComment`, commentController.createComment);
+app.get(`/edit/comment/:commentid`, commentController.editCommentPage);
+app.post(`/editCommentConfirm`, commentController.editCommentConfirm);
 app.post(`/deleteComment`, commentController.deleteComment);
 app.post(`/voteComment`, commentController.voteComment);
 

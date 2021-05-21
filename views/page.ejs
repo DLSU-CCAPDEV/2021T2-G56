@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>h o m e</title>
+    <title><%= page.type %></title>
     <%- include('./partials/header.ejs') %>
 </head>
 <body>
@@ -12,17 +12,14 @@
     <%- include('./partials/navbar.ejs')%>
 
     <div class='wrapper'>
+
         <div class='postwall'>
-            <div class='postingbox'>
-                <textarea name='caption' class="postingbox-text" placeholder='got some cat pics?'></textarea>
-                <input name='filename' class='upload-button' type='file'>
-                <input type="submit" class='submit-button'>
-            </div>
 
             <div class='postlist'>
                 <% for(i=0; i < post.length; i++ ) { %>
                     <%- include('./partials/postbox', {i, post, sess, votepost} ) %>
                 <% } %>
+
             </div>
             
         </div>

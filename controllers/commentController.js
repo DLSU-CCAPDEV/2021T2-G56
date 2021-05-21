@@ -27,6 +27,28 @@ const commentController = {
         });
     },
 
+    editCommentPage: function(req, res) {
+        db.findOne(Comment, {commentid: req.params.commentid}, {}, function(comment) {
+            var sess = req.session;
+            res.render('editCommentPage', {sess, comment} );
+        }); 
+    },
+
+    editCommentConfirm: function(req, res) {
+
+        var entry = {
+            $set: {
+                commentcaption: req.body.commentcaption,
+                dateedited: Date.now()
+            }
+        }
+
+        db.updateOne(Comment, { commentid: req.body.commentid }, entry, function(result) {
+            console.log(result);
+        });
+
+    },
+
     deleteComment: function(req, res) {
         db.deleteOne(Comment, { commentid: req.body.commentid }, function(result) {
             db.deleteMany(VoteComment, { commentparent: req.body.commentid }, function(flag) {

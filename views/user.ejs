@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= user.username %>'s page </title>
+    <%- include('./partials/header.ejs') %>
+</head>
+<body>
+
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class='wrapper'>
+
+        
+        <div class='postwall'>
+            <hr class='profile-hr'>
+            <div class='profile-header'>
+                <img class='profile-img' src='https://drive.google.com/uc?id=<%= user.profileimg %>&export=download'>
+                <span class='profile-username'><%= user.username %></span>
+            </div>
+
+            <div class='profile-bio'>
+                <span class='profile-bio-text'>
+                    <%= user.bio %>
+                </span>
+            </div>
+            
+            <div class='profile-grid'>
+                <div class='profile-grid-col'>
+                    <% var column = 0; %>
+                    <% for(var i=0; i< post.length; i++) { %>
+                        <% if(column < 3) { %>
+                            <a href='/post/<%= post[i].postid %>'><img class='profile-grid-img' src='https://drive.google.com/uc?id=<%= post[i].imgurl %>&export=download'></a>
+                            <% column++; %>
+                        <% } else { %>
+                        </div>
+                        <div class='profile-grid-col'>
+                            <a href='/post/<%= post[i].postid %>'><img class='profile-grid-img' src='https://drive.google.com/uc?id=<%= post[i].imgurl %>&export=download'></a>
+                        <% column = 0; %>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    
+    
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

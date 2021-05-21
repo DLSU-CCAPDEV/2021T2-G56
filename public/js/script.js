@@ -1,6 +1,4 @@
-// https://drive.google.com/uc?id=[ID HERE]&export=download
 $(document).ready(function() {
-
 
 //POSTBOX ENLARGES WHEN FOCUSED ON
     $('.postingbox-text').on('click',function() {
@@ -386,6 +384,16 @@ $(document).ready(function() {
 ////////////////////////////////////////
 
 
+//DELETE COMMENTS
+    $(document).on('click','.comment-footer-3',function() {
+        var commentid = $(this).closest('.commentbox').attr('id');
+
+        $.post('/deleteComment', {commentid: commentid} );
+        alert('this comment has been deleted!');
+        $(this).closest('.commentbox').remove();
+    });
+///////////////////////////////////
+
 
 //FOR UPVOTING COMMENTS
     $(document).on('click','.comment-fish',function() {
@@ -449,66 +457,103 @@ $(document).ready(function() {
 //////////////////////////////////////////////
 
 
-    //DELETE COMMENTS
-    $(document).on('click','.comment-footer-3',function() {
-        var commentid = $(this).closest('.commentbox').attr('id');
-
-        $.post('/deleteComment', {commentid: commentid} );
-        alert('this comment has been deleted!');
-        $(this).closest('.commentbox').remove();
-    });
-
-    // EDIT
-
-    ////////////////////////////////////////////////////////////
-
-    //SETTINGS CANCELED
-    $(document).on('click','.update-cancel-button',function() {
-        window.location.replace("/home");
-    });
-
-    //SETTINGS SUBMITTED
-    $(document).on('click','.update-account-button',function() {
-        var myID = $('.my-settings').attr('id');
-        var newusername = $('#username').val();
-        var newemail = $('#email').val();
-        var newpassword = $('#password').val();
-        var newbio = $('#bio').val();
-        var newprofileimgUncleaned = $('#profilepic').val();
-        var newprofileimg = newprofileimgUncleaned.replace(/^C:\\fakepath\\/, "/images/profiledatabase/");
-
-        var entry = {
-            newusername: newusername,
-            newemail: newemail,
-            newpassword: newpassword,
-            newbio: newbio,
-            newprofileimg: newprofileimg,
-            myID: myID
-        };
-
-        $.post('/changeSettings', entry);
-        alert('settings changed!');
-        window.location.replace("/settings");
-    });
-
-    
-
-    //EDIT COMMENT IS ACCEPTED
+//EDIT COMMENT IS ACCEPTED
     $(document).on('click','.comment-editingbox-submit-button',function() {
-        var commentID = $('.commentbox').attr('id');
-        var backSession = $('.comment-editingbox-cancel-button').attr('id');
-        var newContent = $('.editingbox-text').val();
+        var commentid = $('.commentbox').attr('id');
+        var postid = $('.comment-editingbox-cancel-button').attr('id');
+        var commentcaption = $('.editingbox-text').val();
 
-        $.post('/editComment', {commentID: commentID, newContent: newContent});
+        $.post('/editCommentConfirm', {commentid: commentid, commentcaption: commentcaption} );
         alert('comment has been edited!');
-        window.location.replace("/post/"+backSession);
+        window.location.replace("/post/"+postid);
 
     });
+//////////////////////////////////////////////
 
-    //LOGOUT
+//EDIT COMMENT IS CANCELED
+    $(document).on('click','.comment-editingbox-cancel-button',function() {
+        var postid = $('.comment-editingbox-cancel-button').attr('id');
+        window.location.replace("/post/"+postid);
+
+    });
+//////////////////////////////////////////////
+
+
+//SETTINGS SUBMITTED
+    $(document).on('click','.update-account-button',function() {
+        var username = $('#username').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var bio = $('#bio').val();
+        var profileimg = $('#profilepic')[0].files[0];
+
+        var formdata = new FormData();
+        formdata.append('image',profileimg);
+
+        if( !jQuery.isEmptyObject( profileimg ) ) {
+            $.ajax({
+                url: '/singleprofile',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                'success': function(imgurl){
+                    var entry = {
+                        username: username,
+                        email: email,
+                        password: password,
+                        bio: bio,
+                        profileimg: imgurl,
+                    }
+
+                    $.post('/updateSettings', entry, function (result) {
+                        alert('Settings changed!');
+                        console.log(result);
+                        window.location.replace("/settings");
+                    });
+                }
+            });
+        } else {
+            var entry = {
+                username: username,
+                email: email,
+                password: password,
+                bio: bio
+            };
+            $.post('/updateSettings', entry, function (result) {
+                alert('Settings changed!');
+                console.log(result);
+                window.location.replace("/settings");
+            });
+        }
+    });
+/////////////////////////////////
+
+//SETTINGS CANCELED
+    $(document).on('click','.update-cancel-button',function() {
+        var username = $('#username').attr('placeholder');
+        window.location.replace("/user/"+username);
+    });
+/////////////////////////
+
+// LOGOUT
     $(document).on('click','.logout-button',function() {
+        $.post('/logout');
         alert('good bye!');
         window.location.replace("/");
     });
+///////////////////////
+
+//SETTINGS CANCELED
+    $(document).on('click','.update-delete-button',function() {
+        var deleteconfirmation = confirm('deletion is permanent! know what you\'re getting into!');
+        if(deleteconfirmation) {
+            alert('good bye, old friend :(');
+            $.post('/deleteAccount', function() {
+                window.location.replace("/");
+            });
+        }
+    });
+/////////////////////////
 
 });

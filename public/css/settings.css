@@ -159,6 +159,12 @@ input:focus {
     border-radius: 10px;
 }
 
+.update-delete-button {
+    border-radius: 10px;
+    background: rgb(177, 92, 92);
+    color: white;
+}
+
 .logout-button {
     border-radius: 10px;
     background: rgb(92, 37, 37);

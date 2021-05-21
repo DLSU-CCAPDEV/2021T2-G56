@@ -1,5 +1,8 @@
 # CCAPDEV machine project
-Welcome to group 56's repository. Our project is to create an Instagram-esque website that's DLSU PUSA cat-themed aptly named Catsallian!
+Welcome to group 56's repository. Our project is to create an Instagram-esque website that's DLSU PUSA-themed—aptly named "catsallian"!
+
+# how to run things
+
 
 # things accomplished
 - heroku compatibility
@@ -8,6 +11,4 @@ Welcome to group 56's repository. Our project is to create an Instagram-esque we
 - works in phones
 
 # things to do
-- add password hashing
-- add sessions
-- add delete account button
+- none! mission accomplished

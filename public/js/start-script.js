@@ -105,7 +105,7 @@ $(document).ready(function() {
         }
     }
 
-    //setInterval(rotateImages,5000);
+    setInterval(rotateImages,5000);
     ////////////////////////////////
 
 });

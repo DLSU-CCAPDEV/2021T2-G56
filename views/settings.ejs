@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>catsallian</title>
-    <link rel='stylesheet' href='/css/login.css'>
+    <title>s e t t i n g s</title>
+    <link rel='stylesheet' href='/css/settings.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -56,23 +56,39 @@
                 <img class='background-image' src='/images/catdatabase/catpic36.png'>
             </div>
         </div>
-
+            
         <div class='leftside'>
 
             <div class='upperhalf'>
                 <span class='title'>
-                    catsallian
+                    <img class='settings-profile-pic' src='https://drive.google.com/uc?id=<%=user.profileimg%>&export=download'>
+                    <span class='my-settings' id='<%=user.userid%>'>my settings</span>
                 </span>
-                <form id="myform" method='POST' action='/signupValidation' class='loginform'>
-                    <input class='username-input invisible' name='username' placeholder='username' type='text'>
-                    <input class='email-input' name='email' placeholder='email@address.com' type='email'>
-                    <input class='password-input' name='password' placeholder='password' type='password'>
-                </form>
+                <div class='loginform'>
+                    <label for='username'>username</label>
+                    <input id='username' class='text-input' name='username' placeholder='<%= user.username %>' type='text'>
+                    
+                    <label for='email'>email</label>
+                    <input id='email' class='text-input' name='email' placeholder='<%= user.email %>' type='email'>
+
+                    <label for='password'>password</label>
+                    <input id='password' class='text-input' name='password' placeholder='password' type='password'>
+
+                    <label for='bio'>bio</label>
+                    <input id='bio' class='text-input' name='bio' placeholder='<%= user.bio %>' type='text'>
+
+                    <label for='profilepic'>profile image</label>
+                    <input id='profilepic' class='profile-pic-upload' name='profilepic' type='file'>
+                </div>
             </div>
 
             <div class='lowerhalf'>
-                <input type="submit" class='login-button' form="myform" value='connect'>
-                <a href='#'><div class='login-options'>new user?</div></a>
+                <span>
+                <input type="submit" class='update-account-button' form="myform" value='save changes'>
+                <input type="submit" class='update-cancel-button' value='cancel'>
+                <input type="submit" class='logout-button' value='logout'>
+                <input type="submit" class='update-delete-button' form="myform" value='delete account'>
+                </span>
             </div>
             
             
@@ -82,7 +98,6 @@
     </div>
 
 
-    <script src='/js/start-script.js'></script>
-    <script src="/js/validator.min.js"></script>
+<%- include('./partials/footer.ejs') %>
 </body>
 </html>
