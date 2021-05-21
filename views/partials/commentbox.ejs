@@ -1,0 +1,61 @@
+
+<div class='commentbox' id='<%= comment[i].commentid %>'>
+
+    <div class='comment-vote-column'>
+        <% if(votecomment.voteowner == sess.username) { %>
+            <% if(votecomment.votetype=='upvote') { %>
+                <div class='fish upvoted'></div>
+                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                <div class='fishbone'></div>
+            <% } else if (votecomment.votetype=='downvote') { %>
+                <div class='fish'></div>
+                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                <div class='fishbone downvoted'></div>
+            <% } else { %>
+                <div class='fish'></div>
+                <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+                <div class='fishbone downvoted'></div>
+            <% } %>
+        <% } else { %>
+            <div class='fish'></div>
+            <div class='upvote-count'> <%= comment[i].upvotecount %> </div>
+            <div class='fishbone'></div>
+        <% } %>
+    </div>
+
+    <div class='comment-column'>
+        <div class='comment-header'>
+            <a class='poster-link' href='/user/<%= comment[i].ownerusername %>'>
+
+                    <div class='comment-info'>
+                        <div class='comment-owner'>
+                            <%= comment[i].ownerusername %>
+                        </div>
+                    </div>
+                
+            </a>
+        </div>
+
+
+        <div class='comment-body'>
+            <span class='comment-text'>
+                <p>
+                    <%= comment[i].commentcaption %>
+                </p>
+                
+            </span>
+            
+        </div>
+        <div class='comment-footer'>
+            <% if(comment[i].ownerusername==sess.username) { %>
+                <hr class='post-hr'>
+            
+            <span class='comment-footer-content'>
+                <span class='comment-footer-2'><a href='/edit/comment/<%= comment[i].commentid %>'>edit</a></span>&nbsp;|&nbsp;
+                <span class='comment-footer-3'><a href='#delete/<%= comment[i].commentid %>'>delete</a></span>
+            </span>
+            <% } %>
+        </div>
+    </div>
+
+</div>

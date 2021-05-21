@@ -2,37 +2,34 @@
 <div class='postbox <% if( post[i].ownerusername == sess.username) { %> owned <% } %>' id='<%= post[i].postid %>'>
 
 
-    <% if (votepost.length > 0) { %>
-        <% for(var x = 0; x < votepost.length; x++) { %>
-            <% if(post[i].postid == votepost[x].postparent) { %>
-                <% if(votepost[x].votetype == 'upvote') { %>
-                    <div class='vote-column'>
-                        <div class='fish upvoted'></div>
-                        <div class='upvote-count'> <%= post[i].upvotecount %> </div>
-                        <div class='fishbone'></div>
-                    </div>
-                <% } else if(votepost[x].votetype == 'downvote') { %>
-                    <div class='vote-column'>
-                        <div class='fish'></div>
-                        <div class='upvote-count'> <%= post[i].upvotecount %> </div>
-                        <div class='fishbone downvoted'></div>
-                    </div>
-                <% } else { %>
-                    <div class='vote-column'>
-                        <div class='fish'></div>
-                        <div class='upvote-count'> <%= post[i].upvotecount %> </div>
-                        <div class='fishbone'></div>
-                    </div>
-                <% } %>
+<div class='vote-column'>
+    <% var flag = false %>
+
+    <% for(var x=0; x < votepost.length; x++) { %>
+        <% if(votepost[x].postparent == post[i].postid) { %>
+            <% flag = true; %>
+            <% if (votepost[x].votetype == 'upvote') { %>
+                <div class='fish upvoted'></div>
+                <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+                <div class='fishbone'></div>
+            <% } else if(votepost[x].votetype == 'downvote') { %>
+                <div class='fish'></div>
+                <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+                <div class='fishbone downvoted'></div>
+            <% } else { %>
+                <div class='fish'></div>
+                <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+                <div class='fishbone'></div>
             <% } %>
         <% } %>
-    <% } else { %>
-        <div class='vote-column'>
-            <div class='fish'></div>
-            <div class='upvote-count'> <%= post[i].upvotecount %> </div>
-            <div class='fishbone'></div>
-        </div>
     <% } %>
+
+    <% if (flag == false) { %>
+        <div class='fish'></div>
+        <div class='upvote-count'> <%= post[i].upvotecount %> </div>
+        <div class='fishbone'></div>
+    <% } %>
+</div>
 
     <div class='photo-column'>
         <a href='/post/<%= post[i].postid %>'>

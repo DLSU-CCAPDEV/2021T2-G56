@@ -20,7 +20,10 @@ const createController = {
                 profileimg: req.session.profileimg
             }
 
+            console.log(entry);
+
             db.insertOne(Post, entry, function(flag){
+                console.log(flag);
                 res.send(entry);
             });
         });  

@@ -89,21 +89,19 @@
                                 <span class='selected-footer-1'><a href='#report'>report</a></span>
                             <% } %>
                         </span>
-                    
-                    
                     </div>
                 </div>
-
             </div>
 
+            <div class='commentingbox'>
+                <textarea name='comment' class="commentingbox-text" placeholder='wanna say something?'></textarea>
+                <input type='submit' class='comment-submit-button' value='comment'>
+            </div>
 
-            
-            
+            <% for(var i=0; i<comment.length; i++) { %>
+                <%- include('./partials/commentbox.ejs', {comment, i, sess, votecomment}); %>
+            <% } %>
 
-            
-
-            
-            
 
         </div>
     
