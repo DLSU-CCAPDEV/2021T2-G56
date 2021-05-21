@@ -20,6 +20,8 @@ app.post(`/deletePost`, postController.deletePost);
 app.post(`/votePost`, postController.votePost);
 
 app.post(`/createComment`, commentController.createComment);
+app.get(`/edit/comment/:commentid`, commentController.editCommentPage);
+app.post(`/editCommentConfirm`, commentController.editCommentConfirm);
 app.post(`/deleteComment`, commentController.deleteComment);
 app.post(`/voteComment`, commentController.voteComment);
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit comment</title>
+    <%- include('./partials/header.ejs') %>
+</head>
+<body>
+
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class='wrapper'>
+
+        <div class='postwall'>
+
+            <div class='commentbox owner' id='<%= comment.commentid%>'>
+
+                <div class='comment-column'>
+                    <div class='comment-header'>
+                        <div class='comment-info'>
+                            <div class='comment-owner'>
+                                <%= comment.ownerusername %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='comment-body'>
+                        <span class='comment-text'>
+                            <p>
+                                <%= comment.commentcaption %>
+                            </p>
+                        </span>
+                        
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class='editingbox'>
+                <textarea class="editingbox-text" placeholder='new comment here...'></textarea>
+                <span>
+                    <input type='submit' class='comment-editingbox-submit-button' value='submit'>
+                    <a href='/post/<%=comment.postparent%>'>
+                        <input type='submit' class='comment-editingbox-cancel-button' id='<%=comment.postparent%>' value='cancel'>
+                    </a>
+                </span>
+            </div>
+            
+            
+
+        </div>
+    
+    
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

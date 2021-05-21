@@ -386,6 +386,16 @@ $(document).ready(function() {
 ////////////////////////////////////////
 
 
+//DELETE COMMENTS
+    $(document).on('click','.comment-footer-3',function() {
+        var commentid = $(this).closest('.commentbox').attr('id');
+
+        $.post('/deleteComment', {commentid: commentid} );
+        alert('this comment has been deleted!');
+        $(this).closest('.commentbox').remove();
+    });
+///////////////////////////////////
+
 
 //FOR UPVOTING COMMENTS
     $(document).on('click','.comment-fish',function() {
@@ -449,18 +459,26 @@ $(document).ready(function() {
 //////////////////////////////////////////////
 
 
-    //DELETE COMMENTS
-    $(document).on('click','.comment-footer-3',function() {
-        var commentid = $(this).closest('.commentbox').attr('id');
+//EDIT COMMENT IS ACCEPTED
+    $(document).on('click','.comment-editingbox-submit-button',function() {
+        var commentid = $('.commentbox').attr('id');
+        var postid = $('.comment-editingbox-cancel-button').attr('id');
+        var commentcaption = $('.editingbox-text').val();
 
-        $.post('/deleteComment', {commentid: commentid} );
-        alert('this comment has been deleted!');
-        $(this).closest('.commentbox').remove();
+        $.post('/editCommentConfirm', {commentid: commentid, commentcaption: commentcaption} );
+        alert('comment has been edited!');
+        window.location.replace("/post/"+postid);
+
     });
+//////////////////////////////////////////////
 
-    // EDIT
+//EDIT COMMENT IS CANCELED
+    $(document).on('click','.comment-editingbox-cancel-button',function() {
+        var postid = $('.comment-editingbox-cancel-button').attr('id');
+        window.location.replace("/post/"+postid);
 
-    ////////////////////////////////////////////////////////////
+    });
+//////////////////////////////////////////////
 
     //SETTINGS CANCELED
     $(document).on('click','.update-cancel-button',function() {
@@ -492,18 +510,6 @@ $(document).ready(function() {
     });
 
     
-
-    //EDIT COMMENT IS ACCEPTED
-    $(document).on('click','.comment-editingbox-submit-button',function() {
-        var commentID = $('.commentbox').attr('id');
-        var backSession = $('.comment-editingbox-cancel-button').attr('id');
-        var newContent = $('.editingbox-text').val();
-
-        $.post('/editComment', {commentID: commentID, newContent: newContent});
-        alert('comment has been edited!');
-        window.location.replace("/post/"+backSession);
-
-    });
 
     //LOGOUT
     $(document).on('click','.logout-button',function() {
